@@ -12,6 +12,7 @@
 <meta property="og:image" content="https://fransu006.github.io/img/opulent.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0f0a06">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f0a06'/%3E%3Crect x='3' y='3' width='58' height='58' rx='11' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='40' fill='%23c9a227'%3EF%3C/text%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Karla:wght@400;700;800&display=swap">
 <style>
@@ -42,12 +43,12 @@ nav button.on{background:var(--gold);color:var(--bg)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
 .img{height:200px;background:#0a0704;display:flex;align-items:center;justify-content:center;position:relative}
-.img.has{height:auto;background:#000;cursor:zoom-in}.pic{display:block;width:100%;height:auto}
+.img.has{height:auto;aspect-ratio:1/1;background:#000;cursor:zoom-in}.pic{display:block;width:100%;height:100%;object-fit:contain}
 .ph{width:70px;height:120px;border:2px solid var(--gold);border-radius:10px 10px 16px 16px;position:relative;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--display);font-size:26px}
 .ph:before{content:"";position:absolute;top:-18px;width:26px;height:16px;border:2px solid var(--gold);border-radius:4px}
 .ph.d{width:34px;height:110px;border-radius:8px}.ph.d:before{width:18px;top:-14px;height:12px}
 .tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:20px;letter-spacing:.5px}
-.NUEVO{background:var(--ok);color:#08200c}.AGOTADO{background:var(--bad);color:#fff}
+.NUEVO{background:var(--ok);color:#08200c}.tag.MV{left:auto;right:10px;background:var(--gold);color:#1a1206}.AGOTADO{background:var(--bad);color:#fff}
 .body{padding:14px;flex:1;display:flex;flex-direction:column;gap:8px}.body h3{font-family:var(--display);font-size:21px;margin:0;line-height:1.1}
 .cat{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1px}
 table{width:100%;font-size:13px;border-collapse:collapse;font-variant-numeric:tabular-nums}td,th{padding:4px 0;border-bottom:1px solid var(--line);color:var(--muted)}
@@ -61,9 +62,17 @@ table.two th{font-size:11px;color:var(--gold);font-weight:700;text-align:right}t
 .min{flex-basis:100%;color:var(--gold)!important;font-weight:700;font-size:13px}
 .phb{display:flex;gap:8px}.x.danger{border-color:var(--bad);color:var(--bad)}
 .warn{margin:4px 0 0;color:var(--bad);font-size:13px;font-weight:700}
+.frm{display:flex;flex-direction:column;gap:8px;margin:8px 0 2px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.fh{margin:0;font-size:13px;font-weight:800;color:var(--gold)}
+.fin{width:100%;box-sizing:border-box;background:var(--bg2);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;font:inherit;font-size:16px}
+.fg{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.fg>span{font-size:13px;color:var(--muted);min-width:56px}
+.opt{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:14px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--gold);background:var(--bg2);color:var(--gold);font-weight:700}
+.opt input{accent-color:var(--gold);margin:0}
+.fnote{margin:6px 0 0;font-size:12px;color:var(--muted)}
+button.send{width:100%;border:0;font:inherit;font-weight:800;cursor:pointer}
 .send.dis{background:var(--line);color:var(--muted);pointer-events:none}
 .cnt{color:var(--muted);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-.add.done{background:var(--ok);color:#08200c;border-color:var(--ok)}
 .off .img{opacity:.6}
 .nostock{text-align:center;cursor:default}
 .nojs{max-width:600px;margin:0 auto 18px;text-align:center;color:var(--gold);font-weight:700}
@@ -98,6 +107,7 @@ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bott
 .qty b{min-width:20px;text-align:center}
 .sum{padding:14px 18px;border-top:1px solid var(--gold);display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
 .sum div{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+.sum .frm{display:flex;flex-direction:column;justify-content:flex-start;color:var(--fg)}.sum #fzona{display:block}.sum .fg{display:flex;justify-content:flex-start;color:var(--fg)}
 .sum .tot{color:var(--fg);font-size:20px;font-weight:800}.sum .save{color:var(--ok);font-weight:700}
 .send{display:block;text-align:center;background:var(--wa);color:var(--wa-ink);font-weight:800;text-decoration:none;padding:14px;border-radius:12px;margin-top:6px}
 .clear{background:transparent;border:0;color:var(--muted);text-decoration:underline;font-size:13px;align-self:center}
@@ -150,6 +160,35 @@ html{scroll-behavior:smooth}
 background:var(--wa);color:var(--wa-ink);font-weight:800;text-decoration:none;border-radius:30px;padding:12px 16px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
 body.hasbar #waf{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 @media (max-width:600px){#waf{padding:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:0}#waf::before{content:"💬";font-size:24px}}
+/* pestañas + buscador fijos al bajar */
+:root{--pl:max(16px,env(safe-area-inset-left,0px));--pr:max(16px,env(safe-area-inset-right,0px))}
+#sen{height:1px}
+#stick{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;gap:8px;
+margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px var(--pl);border-bottom:1px solid transparent}
+#stick.stuck{background:var(--bg);border-bottom-color:var(--line);padding-top:calc(8px + env(safe-area-inset-top,0px))}
+#stick nav{margin:0;flex:none;flex-wrap:nowrap;gap:6px}#stick nav button{padding:9px 14px;white-space:nowrap}
+#stick #q{margin:0;flex:1;min-width:0;width:auto;max-width:420px;padding:10px 14px}
+@media (max-width:420px){#stick nav button{font-size:14px;padding:10px 11px}}
+.also{max-width:1200px;margin:0 auto 14px;text-align:center;color:var(--gold);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+/* botón único + cantidad en la tarjeta */
+.ctl{flex:1;display:flex;min-width:0}.ctl .add{min-height:42px}
+.step{flex:1;display:flex;align-items:stretch;justify-content:space-between;min-height:42px;border:1px solid var(--gold);border-radius:10px;overflow:hidden;min-width:0}
+.step button{flex:none;width:30px;border:0;background:var(--gold);color:var(--bg);font-weight:800;font-size:18px;padding:0}
+.ctl:only-child .step button{width:48px}
+.step span{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;min-width:0;font-variant-numeric:tabular-nums}
+.step small{font-size:10px;color:var(--muted);white-space:nowrap}
+.wal{align-self:center;font-size:12px;color:var(--muted);padding:2px 6px}
+/* decants: precio principal en dos columnas */
+.p2{display:flex;gap:8px}.p2 div{flex:1;display:flex;flex-direction:column;min-width:0}
+.p2 span{font-size:12px;color:var(--muted)}.p2 b{font-size:20px;font-variant-numeric:tabular-nums}
+/* progreso hacia el envío gratis */
+.sum .ship{display:block;color:var(--fg);font-size:13px}.ship b{color:var(--gold)}
+.ship i{display:block;height:6px;margin-top:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.ship u{display:block;height:100%;border-radius:6px;background:var(--gold);text-decoration:none}.ship.ok u{background:var(--ok)}
+/* carrito en dos pasos */
+.sum .next{width:100%;border:0;background:var(--gold);color:var(--bg);font-weight:800;padding:14px;border-radius:12px;margin-top:6px}
+.back{background:transparent;border:0;color:var(--gold);font-weight:700;font-size:14px;padding:12px 0 4px}
+.items .frm{margin-top:6px}.items .fg{padding-block:2px}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:no-preference){.add{transition:background .2s}}
 </style>
@@ -165,18 +204,18 @@ body.hasbar #waf{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 <li>💵 Efectivo o transferencia</li>
 </ul>
 <div class="links" role="navigation" aria-label="Accesos rápidos"><a href="#opiniones">⭐ Opiniones de clientes</a><a href="#faq">❓ Preguntas frecuentes</a><a href="https://instagram.com/fransu.perfumes" target="_blank" rel="noopener">📸 @fransu.perfumes</a></div></header>
-<section class="ops" id="opiniones" aria-label="Opiniones de clientes"><div class="shead"><h2>Clientes contentos</h2><p>Experiencias reales. Tocá las capturas para verlas grandes.</p></div>
+<section class="ops" id="opiniones" aria-label="Opiniones de clientes"><div class="shead"><h2>Clientes contentos</h2><p>Experiencias reales. Tocá la captura para verla grande.</p></div>
 <div class="opr">
 <figure style="margin:0"><video src="img/cliente-video.mp4" poster="img/cliente-video.jpg" controls playsinline preload="none" aria-label="Video de un cliente recomendando FRANSU"></video></figure>
 <figure style="margin:0"><img src="img/clientes-1.jpg" alt="Capturas de clientes contentos con sus pedidos" loading="lazy" onclick="zoomSrc(this.src,this.alt)"><figcaption>Pedidos entregados</figcaption></figure>
-<figure style="margin:0"><img src="img/clientes-2.jpg" alt="Más capturas de clientes contentos" loading="lazy" onclick="zoomSrc(this.src,this.alt)"><figcaption>Más reseñas</figcaption></figure>
 </div></section>
-<div id="ctl" hidden><nav><button id="b1" class="on" onclick="show('s')">Perfumes sellados</button><button id="b2" onclick="show('d')">Decants</button></nav>
-<input id="q" placeholder="Buscar perfume..." oninput="render()" aria-label="Buscar perfume">
-<div class="chips" id="chips"></div>
+<main id="cat"><div id="sen"></div>
+<div id="stick" hidden><nav aria-label="Tipo de producto"><button id="b1" class="on" onclick="show('s')">Sellados</button><button id="b2" onclick="show('d')">Decants</button></nav>
+<input id="q" placeholder="Buscar nombre o aroma" enterkeyhint="search" autocomplete="off" oninput="render();toCat(1)" aria-label="Buscar perfume en sellados y decants"></div>
+<div id="ctl" hidden><div class="chips" id="chips"></div>
 <div class="sort"><label for="ord">Ordenar por</label><select id="ord" onchange="ord=this.value;render()"><option value="asc">Menor precio</option><option value="desc">Mayor precio</option><option value="az">A - Z</option></select></div></div>
 <noscript><p class="nojs">Para ver el catálogo necesitás abrirlo en un navegador con JavaScript activado.</p></noscript>
-<div id="g"><p class="empty">Cargando catálogo…</p></div>
+<div id="g"><p class="empty">Cargando catálogo…</p></div></main>
 <section class="faq" id="faq" aria-label="Preguntas frecuentes"><h2>Preguntas frecuentes</h2>
 <details><summary>¿Los perfumes son originales?</summary><p>Sí, los perfumes sellados son originales de las marcas que figuran en cada uno. En decants, la sección "Inspiración de Perfumista" está separada y aclarada aparte.</p></details>
 <details><summary>¿Cómo funciona el descuento por cantidad?</summary><p>En sellados, el precio de cada perfume baja según cuántos lleves en total, aunque sean distintos: 3, 6 o 10 y más. En decants pasa lo mismo dentro de cada categoría. El carrito te muestra el descuento a medida que sumás.</p></details>
@@ -191,7 +230,7 @@ body.hasbar #waf{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 <div id="bar" hidden><div class="info"><b id="barTot"></b><span id="barSave"></span></div><button onclick="openCart()">Ver carrito (<span id="barN"></span>)</button></div>
 
 <div id="cart" hidden onclick="if(event.target===this)closeCart()"><div class="panel" role="dialog" aria-label="Carrito">
-<div class="ph1"><h2>Tu pedido</h2><div class="phb"><button class="x danger" id="vac" onclick="askClear()">Vaciar carrito</button><button class="x" onclick="closeCart()">Cerrar</button></div></div>
+<div class="ph1"><h2 id="ctit">Tu pedido</h2><div class="phb"><button class="x danger" id="vac" onclick="askClear()">Vaciar carrito</button><button class="x" onclick="closeCart()">Cerrar</button></div></div>
 <div class="items" id="items"></div>
 <div class="sum" id="sum"></div>
 </div></div>
@@ -206,6 +245,10 @@ const LINK_SELLADOS = "https://docs.google.com/spreadsheets/d/1DjyJkLeMX1MFed2XN
 const LINK_DECANTS  = "https://docs.google.com/spreadsheets/d/1DjyJkLeMX1MFed2XNuijfAL-Mi6L5tNLSlGdYS0PE3w/gviz/tq?tqx=out:csv&headers=1&sheet=Decants";
 /* ============================================================================ */
 let PERF=[{"n": "Lattafa Opulent Dubai", "g": "U", "s": "NUEVO", "p": [61000, 55500, 50000, 46500], "f": "opulent.jpg"}, {"n": "Khamrah", "g": "U", "s": "", "p": [63750, 57900, 51750, 47950], "f": "khamrah.jpg"}, {"n": "Yara Candy", "g": "F", "s": "", "p": [65000, 59000, 53000, 49500], "f": "yara-candy.jpg"}, {"n": "Odyssey Limoni", "g": "U", "s": "AGOTADO", "p": [65000, 59000, 53000, 49500], "f": "limoni.jpg"}, {"n": "Yara Pink", "g": "F", "s": "AGOTADO", "p": [66000, 60000, 54000, 50500], "f": "yara-pink.jpg"}, {"n": "Odyssey Homme Black", "g": "M", "s": "", "p": [66000, 59700, 54000, 50200], "f": "homme-black.jpg"}, {"n": "Philos Pura", "g": "U", "s": "AGOTADO", "p": [66000, 59700, 54000, 50200], "f": "philos-pura.jpg"}, {"n": "The Kingdom (Mujer)", "g": "F", "s": "AGOTADO", "p": [66000, 59700, 54000, 50200], "f": "kingdom-mujer.jpg"}, {"n": "Hawas For Him", "g": "M", "s": "AGOTADO", "p": [66000, 59700, 54000, 50200], "f": "hawas-him.jpg"}, {"n": "Vintage Radio", "g": "U", "s": "", "p": [66900, 60600, 54450, 50650], "f": "vintage-radio.jpg"}, {"n": "Lattafa Badee Oud Sublime", "g": "U", "s": "AGOTADO", "p": [67000, 60500, 55000, 51000], "f": "badee-sublime.jpg"}, {"n": "Honor and Glory", "g": "U", "s": "AGOTADO", "p": [67000, 61000, 54500, 50500], "f": "honor-glory.jpg"}, {"n": "Odyssey Mega", "g": "M", "s": "AGOTADO", "p": [67000, 61000, 54500, 50500], "f": "mega.jpg"}, {"n": "Asad Black", "g": "M", "s": "", "p": [67800, 61500, 55350, 51550], "f": "asad.jpg"}, {"n": "Fakhar Black", "g": "M", "s": "AGOTADO", "p": [67800, 61500, 55350, 51550], "f": "fakhar.jpg"}, {"n": "The Kingdom (Hombre)", "g": "M", "s": "AGOTADO", "p": [67800, 61500, 55350, 51550], "f": "kingdom.jpg"}, {"n": "Odyssey Homme White", "g": "M", "s": "", "p": [68000, 61500, 55500, 52000], "f": "homme-white.jpg"}, {"n": "Odyssey Mandarin Sky", "g": "M", "s": "", "p": [68700, 62400, 56250, 52000], "f": "mandarin.jpg"}, {"n": "9 PM", "g": "M", "s": "AGOTADO", "p": [69600, 63300, 56700, 52900], "f": "9pm.jpg"}, {"n": "Odyssey Mango", "g": "U", "s": "AGOTADO", "p": [72300, 65550, 59400, 55150], "f": "mango.jpg"}, {"n": "Her Confession", "g": "F", "s": "AGOTADO", "p": [73650, 66900, 60300, 56050], "f": "her-confession.jpg"}, {"n": "9 AM Dive", "g": "U", "s": "", "p": [74100, 67350, 60750, 56500], "f": "9am-dive.jpg"}, {"n": "His Confession", "g": "M", "s": "", "p": [74550, 67800, 61200, 56950], "f": "his-confession.jpg"}, {"n": "Victoria Lattafa", "g": "F", "s": "", "p": [75000, 67500, 60750, 56500], "f": "victoria.jpg"}, {"n": "Pride Art of Universe", "g": "U", "s": "", "p": [76800, 69600, 63000, 58750], "f": "art-universe.jpg"}, {"n": "Asad Elixir", "g": "M", "s": "", "p": [76800, 69600, 63000, 58750], "f": "asad-elixir.jpg"}, {"n": "Club de Nuit Intense", "g": "M", "s": "", "p": [78600, 71400, 64350, 60100], "f": "cdn-intense.jpg"}, {"n": "Armaf Odyssey Aqua", "g": "M", "s": "NUEVO", "p": [80000, 72500, 65500, 61500], "f": "odyssey-aqua.jpg"}, {"n": "9 PM Elixir", "g": "M", "s": "AGOTADO", "p": [80400, 72750, 66150, 61900], "f": "9pm-elixir.jpg"}, {"n": "Asad Bourbon", "g": "M", "s": "", "p": [81000, 73500, 66500, 62000], "f": "asad-bourbon.jpg"}, {"n": "Atlas Lattafa", "g": "U", "s": "AGOTADO", "p": [82000, 74500, 67250, 62750], "f": "atlas.jpg"}, {"n": "CK One Calvin Klein", "g": "U", "s": "AGOTADO", "p": [84000, 75900, 69300, 64600], "f": "ck-one.jpg"}, {"n": "Hawas Fire", "g": "M", "s": "AGOTADO", "p": [84000, 75900, 69300, 64600], "f": "hawas-fire.jpg"}, {"n": "Club de Nuit Untold", "g": "U", "s": "AGOTADO", "p": [85000, 76900, 70100, 65600], "f": "cdn-untold.jpg"}, {"n": "Hawas Malibù", "g": "M", "s": "AGOTADO", "p": [85800, 77700, 70650, 66400], "f": "hawas-malibu.jpg"}, {"n": "Liquid Brun", "g": "M", "s": "AGOTADO", "p": [88000, 79450, 71950, 67250], "f": "liquid-brun.jpg"}, {"n": "Rasasi Hawas Ice", "g": "M", "s": "NUEVO", "p": [92000, 83000, 76000, 71000], "f": "hawas-ice.jpg", "ml": "100 ml"}, {"n": "Amber Oud Dubai Night", "g": "U", "s": "AGOTADO", "p": [93000, 84000, 76950, 72250], "f": "amber-dubai-night.jpg"}, {"n": "Vulcan Feu", "g": "U", "s": "AGOTADO", "p": [93450, 84450, 76950, 72700], "f": "vulcan.jpg"}, {"n": "Odyssey Mandarin Sky Elixir", "g": "M", "s": "AGOTADO", "p": [94800, 85800, 78300, 73600], "f": "mandarin-elixir.jpg"}, {"n": "Armaf Club de Nuit Urban Elixir", "g": "M", "s": "AGOTADO", "p": [95000, 86000, 78500, 73500], "f": "urban-elixir.jpg"}, {"n": "French Avenue Chaos Extrait", "g": "U", "s": "AGOTADO", "p": [95000, 86000, 78500, 73500], "f": "chaos.jpg"}, {"n": "French Avenue Atlantis Extrait", "g": "U", "s": "AGOTADO", "p": [100000, 90500, 82500, 77500], "f": "atlantis.jpg"}, {"n": "Club de Nuit Precieux", "g": "M", "s": "AGOTADO", "p": [108000, 97500, 90000, 84500], "f": "cdn-precieux.jpg"}, {"n": "Amber Oud Gold Edition", "g": "U", "s": "", "p": [110000, 99500, 91000, 85500], "f": "amber-gold.jpg"}, {"n": "Al Haramain Amber Oud Aqua Dubai Extrait", "g": "U", "s": "NUEVO", "p": [110000, 99500, 91000, 85500], "f": "amber-aqua.jpg"}, {"n": "Afnan 9 PM Night Out Extrait", "g": "U", "s": "NUEVO", "p": [115000, 104000, 95500, 90000], "f": "9pm-night-out.jpg"}, {"n": "Turathi Blue", "g": "M", "s": "", "p": [115000, 104000, 95500, 90000], "f": "turathi.jpg"}, {"n": "Rome Extradose", "g": "M", "s": "AGOTADO", "p": [120000, 108500, 100000, 94000], "f": "rome.jpg"}, {"n": "Rasasi Hawas Overdose", "g": "M", "s": "AGOTADO", "p": [126000, 114000, 104000, 97500], "f": "hawas-overdose.jpg"}, {"n": "Azzaro The Most Wanted EDP", "g": "M", "s": "AGOTADO", "p": [195000, 176000, 162000, 152500], "f": "tmw.jpg"}, {"n": "JPG Le Male Elixir 125ml", "g": "M", "s": "AGOTADO", "p": [223500, 202500, 184500, 173000], "f": "le-male.jpg"}], DEC=[{"n": "Badee Oud Sublime", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "badee-sublime.jpg"}, {"n": "Odyssey Mega", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "mega.jpg"}, {"n": "Yara Candy", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "yara-candy.jpg"}, {"n": "Honor and Glory", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "honor-glory.jpg"}, {"n": "Philos Pura", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "philos-pura.jpg"}, {"n": "Jean Lowe Immortel", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "jean-lowe.jpg"}, {"n": "Pacific Blue", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "pacific-blue.jpg"}, {"n": "Opulent Dubai", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [13500, 13000, 11000, 10000], "f": "opulent.jpg"}, {"n": "Lattafa Fakhar", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "fakhar.jpg"}, {"n": "Asad Black", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "asad.jpg"}, {"n": "9 PM Black", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "9pm.jpg"}, {"n": "9 AM Dive", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "9am-dive.jpg"}, {"n": "Odyssey Homme White", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "homme-white.jpg"}, {"n": "Odyssey Homme Black", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "homme-black.jpg"}, {"n": "Vintage Radio", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "vintage-radio.jpg"}, {"n": "The Kingdom", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "kingdom.jpg"}, {"n": "Khamra Classic", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "khamrah.jpg"}, {"n": "Salvo", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "salvo.jpg"}, {"n": "Victoria", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "victoria.jpg"}, {"n": "Odyssey Limoni", "k": "B", "s": "", "p5": [7500, 7000, 6000, 5500], "p10": [14000, 13000, 11000, 10000], "f": "limoni.jpg"}, {"n": "Salvo Elixir", "k": "B", "s": "", "p5": [8000, 7500, 6000, 5500], "p10": [15000, 13000, 11000, 10000], "f": "salvo-elixir.jpg"}, {"n": "Mandarin Sky", "k": "B", "s": "", "p5": [8000, 7500, 6000, 5500], "p10": [15000, 13000, 11000, 10000], "f": "mandarin.jpg"}, {"n": "His Confession", "k": "B", "s": "", "p5": [8000, 7500, 6000, 5500], "p10": [15000, 13000, 11000, 10000], "f": "his-confession.jpg"}, {"n": "Her Confession", "k": "B", "s": "", "p5": [8000, 7500, 6000, 5500], "p10": [15000, 13000, 11000, 10000], "f": "her-confession.jpg"}, {"n": "Club de Nuit Intense", "k": "B", "s": "", "p5": [8000, 7500, 6000, 5500], "p10": [15000, 13000, 11000, 10000], "f": "cdn-intense.jpg"}, {"n": "Art of Universe", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "art-universe.jpg"}, {"n": "Spectre Ghost", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "spectre.jpg"}, {"n": "Ishq Al Shuyukh Silver", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "ishq.jpg"}, {"n": "Asad Elixir", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "asad-elixir.jpg"}, {"n": "9 PM Elixir", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "9pm-elixir.jpg"}, {"n": "Hawas Ice", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "hawas-ice.jpg"}, {"n": "Hawas For Him", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "hawas-him.jpg"}, {"n": "Vulcan Feu", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "vulcan.jpg"}, {"n": "Odyssey Mango", "k": "A", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "mango.jpg"}, {"n": "Amber Oud Aqua Dubai", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "amber-aqua.jpg"}, {"n": "Amber Oud Gold", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "amber-gold.jpg"}, {"n": "Amber Oud Dubai Night", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "amber-dubai-night.jpg"}, {"n": "Liquid Brun", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "liquid-brun.jpg"}, {"n": "Hawas Fire", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "hawas-fire.jpg"}, {"n": "Hawas Malibù", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "hawas-malibu.jpg"}, {"n": "Hawas Tropical", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "hawas-tropical.jpg"}, {"n": "Odyssey Aqua", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "odyssey-aqua.jpg"}, {"n": "9 PM Night Out", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "9pm-night-out.jpg"}, {"n": "Asad Bourbon", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "asad-bourbon.jpg"}, {"n": "CK One Calvin Klein", "k": "A", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "ck-one.jpg"}, {"n": "Club de Nuit Urban Elixir", "k": "A", "s": "NUEVO", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "urban-elixir.jpg"}, {"n": "French Avenue Chaos", "k": "A", "s": "NUEVO", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "chaos.jpg"}, {"n": "French Avenue Atlantis", "k": "A", "s": "NUEVO", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "atlantis.jpg"}, {"n": "Mandarin Sky Elixir", "k": "A", "s": "", "p5": [9500, 9000, 7600, 7200], "p10": [18000, 15000, 14200, 13400], "f": "mandarin-elixir.jpg"}, {"n": "Rome Extradose", "k": "A", "s": "", "p5": [9500, 9000, 7600, 7200], "p10": [18000, 15000, 14200, 13400], "f": "rome.jpg"}, {"n": "Turathi Blue", "k": "A", "s": "", "p5": [9500, 9000, 7600, 7200], "p10": [18000, 15000, 14200, 13400], "f": "turathi.jpg"}, {"n": "Hawas Overdose", "k": "A", "s": "NUEVO", "p5": [10000, 9500, 7600, 7200], "p10": [19000, 15000, 14200, 13400], "f": "hawas-overdose.jpg"}, {"n": "Club de Nuit Precieux", "k": "P", "s": "", "p5": [16000, 15500, 12000, 12000], "p10": [31000, 29000, 23000, 23000], "f": "cdn-precieux.jpg"}, {"n": "Atlas Lattafa", "k": "P", "s": "", "p5": [16000, 15500, 12000, 12000], "p10": [31000, 29000, 23000, 23000], "f": "atlas.jpg"}, {"n": "JPG Le Male Elixir", "k": "P", "s": "NUEVO", "p5": [18000, 17500, 13500, 13500], "p10": [35000, 32500, 26000, 26000], "f": "le-male.jpg"}, {"n": "Azzaro The Most Wanted EDP", "k": "P", "s": "", "p5": [19000, 18500, 14500, 14500], "p10": [37000, 34500, 27500, 27500], "f": "tmw.jpg"}, {"n": "Erba Pura", "k": "I", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "erba-pura.jpg"}, {"n": "Tom Ford Oud Wood", "k": "I", "s": "", "p5": [8500, 8000, 7600, 7200], "p10": [16000, 15000, 14200, 13400], "f": "oud-wood.jpg"}, {"n": "Torino 21", "k": "I", "s": "", "p5": [9000, 8500, 7600, 7200], "p10": [17000, 15000, 14200, 13400], "f": "torino21.jpg"}];
+/* Más vendidos por defecto (según ventas reales). Si la planilla tiene la columna "masvendido", manda la planilla. */
+const MV_S=new Set(["Rasasi Hawas Ice","Odyssey Mandarin Sky"]), MV_D=new Set(["9 PM Night Out","Liquid Brun","Hawas Ice","Amber Oud Aqua Dubai"]);
+/* Estadísticas: creá tu cuenta gratis en goatcounter.com y pegá acá tu código (lo que va antes de .goatcounter.com) */
+const GOATCOUNTER = "";
 const CATS=[{k:"A",n:"Categoría A"},{k:"B",n:"Categoría B"},{k:"P",n:"Premium"},{k:"I",n:"Inspiración de Perfumista"}];
 let GEN={},FOTO={};function idx(){GEN={};FOTO={};PERF.forEach(p=>{GEN[p.n]=p.g;if(p.f)FOTO[p.n]=p.f});DEC.forEach(p=>{if(p.f)FOTO[p.n]=p.f})}idx();
 const GN={M:"Masculinos",F:"Femeninos",U:"Unisex"};
@@ -217,9 +260,10 @@ let cart={};
 try{cart=JSON.parse(localStorage.getItem("fransu-cart")||"{}")||{}}catch(e){cart={}}
 function save(){try{localStorage.setItem("fransu-cart",JSON.stringify(cart))}catch(e){}}
 
-function show(t){tab=t;b1.classList.toggle("on",t=="s");b2.classList.toggle("on",t=="d");render()}
-function media(n,d,s){const src=pic(n);
- return `<div class="img ${src?"has":""}" ${src?`onclick="zoom('${n.replace(/'/g,"\\'")}')"`:""}>${src?`<img class="pic" src="${src}" alt="${n}" loading="lazy" decoding="async">`:`<div class="ph ${d?"d":""}">${d?"":"F"}</div>`}${s?`<span class="tag ${s}">${s}</span>`:""}</div>`}
+function show(t){tab=t;b1.classList.toggle("on",t=="s");b2.classList.toggle("on",t=="d");render();toCat()}
+const isMV=(p,d)=>p.mv===undefined?(d?MV_D:MV_S).has(p.n):p.mv;
+function media(n,d,s,mv){const src=pic(n);
+ return `<div class="img ${src?"has":""}" ${src?`onclick="zoom('${n.replace(/'/g,"\\'")}')"`:""}>${src?`<img class="pic" src="${src}" alt="${n}" loading="lazy" decoding="async">`:`<div class="ph ${d?"d":""}">${d?"":"F"}</div>`}${s?`<span class="tag ${s}">${s}</span>`:""}${mv?`<span class="tag MV">★ MÁS VENDIDO</span>`:""}</div>`}
 const esc=s=>s.replace(/'/g,"\\'");
 
 const cntS=k=>k=="all"?PERF.length:PERF.filter(p=>(GEN[p.n]||"U")==k).length, cntD=k=>k=="all"?DEC.length:DEC.filter(p=>p.k==k).length;
@@ -227,37 +271,98 @@ function chips(){const list=(tab=="s"?[["all","Todos"],["M","Masculinos"],["F","
  const cur=tab=="s"?fs:fd;
  document.getElementById("chips").innerHTML=list.map(([k,n])=>`<button class="${cur==k?"on":""}" onclick="${tab=="s"?"fs":"fd"}='${k}';render()">${n}</button>`).join("")}
 
-function render(){chips();const q=document.getElementById("q").value.toLowerCase().trim();let h="";
-if(tab=="s"){
- const all=srt(PERF.filter(p=>(fs=="all"||(GEN[p.n]||"U")==fs)&&p.n.toLowerCase().includes(q)),p=>p.p[0]);
+/* Descripciones propuestas: revisalas. Si la planilla trae "descripcion" para un perfume, se usa la de la planilla. */
+const DESC_L=[
+[["Khamrah","Khamra Classic"],"Dulce y especiado: canela, dátiles y vainilla"],
+[["Yara Candy"],"Dulce y frutal, tipo golosina"],
+[["Yara Pink"],"Dulce y cremoso: vainilla, orquídea y frutas tropicales"],
+[["Odyssey Limoni"],"Cítrico y fresco, con mucho limón"],
+[["Odyssey Homme Black"],"Dulce y elegante: iris, cacao y vainilla"],
+[["Philos Pura","Erba Pura","Amber Oud Gold Edition","Amber Oud Gold"],"Frutal y dulce, con almizcle y vainilla"],
+[["The Kingdom (Hombre)"],"Dulce y especiado: lavanda, cardamomo y vainilla"],
+[["Hawas For Him"],"Fresco y acuático, con frutas y un fondo dulce"],
+[["Vintage Radio"],"Cálido: ron, tabaco y vainilla"],
+[["Lattafa Badee Oud Sublime","Badee Oud Sublime"],"Frutal y dulce, con fondo de vainilla y pachulí"],
+[["Honor and Glory"],"Dulce y goloso: piña, crème brûlée y especias"],
+[["Asad Black","Salvo Elixir"],"Especiado e intenso: pimienta, tabaco y vainilla"],
+[["Fakhar Black","Lattafa Fakhar"],"Fresco y aromático: manzana, lavanda y maderas"],
+[["Odyssey Mandarin Sky","Mandarin Sky"],"Mandarina dulce con caramelo y haba tonka"],
+[["9 PM","9 PM Black"],"Dulce y llamativo: vainilla, manzana y canela"],
+[["Odyssey Mango"],"Frutal tropical, con mango bien marcado"],
+[["Her Confession"],"Floral cálido: nardo, canela y vainilla"],
+[["His Confession"],"Dulce y especiado: lavanda, canela y vainilla"],
+[["9 AM Dive"],"Fresco y acuático: cítricos, menta y manzana"],
+[["Club de Nuit Intense"],"Cítrico y ahumado: piña, abedul y almizcle"],
+[["Armaf Odyssey Aqua","Odyssey Aqua"],"Fresco y acuático"],
+[["Atlas Lattafa"],"Marino y salado, muy intenso"],
+[["CK One Calvin Klein"],"Cítrico, limpio y liviano"],
+[["Club de Nuit Untold"],"Ambarado y dulce: azafrán, jazmín y cedro"],
+[["Liquid Brun"],"Vainilla especiada con canela y praliné"],
+[["Rasasi Hawas Ice","Hawas Ice"],"Fresco y cítrico, bien helado"],
+[["Turathi Blue"],"Cítrico y fresco: pomelo, ámbar y almizcle"],
+[["Azzaro The Most Wanted EDP"],"Dulce y especiado: toffee, cardamomo y maderas"],
+[["JPG Le Male Elixir 125ml","JPG Le Male Elixir"],"Dulce e intenso: lavanda, vainilla, miel y tabaco"],
+[["Jean Lowe Immortel"],"Fresco y ambarado: jengibre y pomelo"],
+[["Salvo"],"Fresco y especiado: bergamota y pimienta"],
+[["Tom Ford Oud Wood"],"Amaderado: oud, cardamomo y vainilla"],
+[["Torino 21"],"Fresco y verde: menta, albahaca y cítricos"]];
+let DESC={};
+const dsc=p=>p.d||DESC[norm(p.n)]||"";
+const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const FREE=65000;
+/* botón "Agregar" que pasa a "− n +" cuando el producto ya está en el carrito */
+DESC_L.forEach(([ns,d])=>ns.forEach(n=>DESC[norm(n)]=d));
+function ctlIn(k,l,q){const ml=k.split("|")[2];
+ return q?`<div class="step"><button data-a="-1" aria-label="Quitar uno">−</button><span><b>${q}</b><small>${ml?ml+" ml":"en el carrito"}</small></span><button data-a="1" aria-label="Agregar uno">+</button></div>`:`<button class="add" data-a="1">${l}</button>`}
+function ctl(k,l){const q=cart[k]||0;return `<div class="ctl" data-k="${hx(k)}" data-l="${hx(l)}" data-q="${q}">${ctlIn(k,l,q)}</div>`}
+function syncCtl(){document.querySelectorAll("#g .ctl").forEach(el=>{const q=cart[el.dataset.k]||0;if(el.dataset.q!=q){el.dataset.q=q;el.innerHTML=ctlIn(el.dataset.k,el.dataset.l,q)}})}
+function toCat(f){const c=document.getElementById("cat"),y=c.getBoundingClientRect().top;if(y<-4||(f&&y>4))c.scrollIntoView()}
+
+function secS(q,f){let h="";
+ const all=srt(PERF.filter(p=>(f=="all"||(GEN[p.n]||"U")==f)&&norm(p.n+" "+dsc(p)).includes(q)),p=>p.p[0]);
  const ya=all.filter(p=>p.s!="AGOTADO"),enc=all.filter(p=>p.s=="AGOTADO");
  const card=p=>{const ag=p.s=="AGOTADO";
-  return `<div class="card ${ag?"off":""}">${media(p.n,0,ag?"":p.s)}<div class="body"><span class="cat">Sellado · ${{M:"Masculino",F:"Femenino",U:"Unisex"}[GEN[p.n]||"U"]}${p.ml?` · <span class="ml">${p.ml}</span>`:""}</span><h3>${p.n}</h3>
-  ${p.d?`<p class="desc">${p.d}</p>`:""}
+  return `<div class="card ${ag?"off":""}">${media(p.n,0,ag?"":p.s,!ag&&isMV(p,0))}<div class="body"><span class="cat">Sellado · ${{M:"Masculino",F:"Femenino",U:"Unisex"}[GEN[p.n]||"U"]}${p.ml?` · <span class="ml">${p.ml}</span>`:""}</span><h3>${p.n}</h3>
+  ${dsc(p)?`<p class="desc">${dsc(p)}</p>`:""}
   <div class="price"><b>${fm(p.p[0])}</b><span>1 unidad</span></div>
   <span class="from">Desde ${fm(p.p[3])} c/u llevando varios</span>
   <details class="tiers"><summary>Ver precios por cantidad</summary><table>
   <tr><td>1 unidad</td><td>${fm(p.p[0])}</td></tr><tr><td>Llevando 3 surtidos</td><td>${fm(p.p[1])} c/u</td></tr>
   <tr><td>Llevando 6 surtidos</td><td>${fm(p.p[2])} c/u</td></tr><tr><td>Llevando 10+ surtidos</td><td>${fm(p.p[3])} c/u</td></tr></table></details>
-  <div class="row">${ag?`<a class="wa" target="_blank" href="${waLink(`Hola FRANSU! Quiero encargar 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">Encargar · llega en 3-5 días</a>`:
-  `<button class="add" onclick="add('s|${esc(p.n)}',this)">Agregar al carrito</button><a class="wa" target="_blank" href="${waLink(`Hola FRANSU! Quiero pedir 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">Pedir por WhatsApp</a>`}</div></div></div>`};
+  ${ag?`<div class="row"><a class="wa" target="_blank" rel="noopener" href="${waLink(`Hola FRANSU! Quiero encargar 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">Encargar · llega en 3-5 días</a></div>`:
+  `<div class="row">${ctl("s|"+p.n,"Agregar al carrito")}</div><a class="wal" target="_blank" rel="noopener" href="${waLink(`Hola FRANSU! Quiero pedir 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">o pedilo directo por WhatsApp</a>`}</div></div>`};
  if(ya.length){
- h+=`<section class="sec"><div class="shead"><h2>${fs=="all"?"Disponibles ahora":GN[fs]+" disponibles"}</h2><span class="cnt">${ya.length} perfume${ya.length>1?"s":""}</span><p>El precio de cada sellado baja según cuántos lleves en total (podés surtir)</p></div><div class="grid">${ya.map(card).join("")}</div></section>`}
+ h+=`<section class="sec"><div class="shead"><h2>${f=="all"?"Disponibles ahora":GN[f]+" disponibles"}</h2><span class="cnt">${ya.length} perfume${ya.length>1?"s":""}</span><p>El precio de cada sellado baja según cuántos lleves en total (podés surtir)</p></div><div class="grid">${ya.map(card).join("")}</div></section>`}
  if(enc.length){
  h+=`<section class="sec"><div class="shead"><h2>Por encargo</h2><span class="cnt">${enc.length} perfume${enc.length>1?"s":""}</span><p>Sin stock ahora, te lo conseguimos. <span class="encd">Llega en 3 a 5 días hábiles.</span></p></div><div class="grid">${enc.map(card).join("")}</div></section>`}
-}else{
+ return h}
+
+function secD(q,f){let h="";
  const L=["1 unidad","x2","x5","x10"];
- CATS.filter(c=>fd=="all"||fd==c.k).forEach(c=>{const items=srt(DEC.filter(p=>p.k==c.k&&p.n.toLowerCase().includes(q)),p=>p.p10[0]*100+p.p5[0]/1000);if(!items.length)return;
+ CATS.filter(c=>f=="all"||f==c.k).forEach(c=>{const items=srt(DEC.filter(p=>p.k==c.k&&norm(p.n+" "+dsc(p)).includes(q)),p=>p.p10[0]*100+p.p5[0]/1000);if(!items.length)return;
  const promo=s=>{const v=i=>{const a=items.map(p=>p["p"+s][i]);return a.every(x=>x==a[0])?fm(a[0])+" c/u":"según perfume"};return `<div class="promo"><b>${s} ml</b><span>x2 ${v(1)}</span><span>x5 ${v(2)}</span><span>x10 ${v(3)}</span></div>`};
  h+=`<section class="sec"><div class="shead"><h2>${c.n}</h2><span class="cnt">${items.length} decant${items.length>1?"s":""}</span><p>Promos combinables entre los decants de esta categoría (5 ml y 10 ml suman por separado)</p><p class="min">${c.k=="P"?"Sin compra mínima":"Compra mínima: 2 decants de 5 ml o 1 de 10 ml"}</p>${promo("5")}${promo("10")}${(()=>{const e=items.filter(p=>p.s!="AGOTADO").slice(0,2);return e.length==2?`<span class="ex">Ejemplo: ${e[0].n} + ${e[1].n} de 5 ml = <b>${fm(e[0].p5[1]+e[1].p5[1])}</b> en total</span>`:""})()}</div><div class="grid">`;
  items.forEach(p=>{
-  h+=`<div class="card">${media(p.n,1,p.s)}<div class="body"><span class="cat">Decant · ${c.n}</span><h3>${p.n}</h3>${p.d?`<p class="desc">${p.d}</p>`:""}
-  <table class="two"><tr><th></th><th>5 ml</th><th>10 ml</th></tr>${L.map((l,i)=>`<tr><td>${l}</td><td>${fm(p.p5[i])}</td><td>${fm(p.p10[i])}</td></tr>`).join("")}</table>
-  <div class="row">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:`<button class="add" onclick="add('d|${esc(p.n)}|5',this)">+ 5 ml</button><button class="add" onclick="add('d|${esc(p.n)}|10',this)">+ 10 ml</button>`}</div>
+  h+=`<div class="card">${media(p.n,1,p.s,p.s!="AGOTADO"&&isMV(p,1))}<div class="body"><span class="cat">Decant · ${c.n}</span><h3>${p.n}</h3>${dsc(p)?`<p class="desc">${dsc(p)}</p>`:""}
+  <div class="p2"><div><span>5 ml</span><b>${fm(p.p5[0])}</b></div><div><span>10 ml</span><b>${fm(p.p10[0])}</b></div></div>
+  ${p.p5[3]&&p.p5[3]<p.p5[0]?`<span class="from">Desde ${fm(p.p5[3])} los 5 ml llevando varios</span>`:""}
+  <details class="tiers"><summary>Ver precios por cantidad</summary><table class="two"><tr><th></th><th>5 ml</th><th>10 ml</th></tr>${L.map((l,i)=>`<tr><td>${l}</td><td>${fm(p.p5[i])}</td><td>${fm(p.p10[i])}</td></tr>`).join("")}</table></details>
+  <div class="row">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:ctl("d|"+p.n+"|5","+ 5 ml")+ctl("d|"+p.n+"|10","+ 10 ml")}</div>
   </div></div>`});
- h+=`</div></section>`})
-}
-document.getElementById("g").innerHTML=h||"<p class='empty'>No encontramos ese perfume.</p>"}
+ h+=`</div></section>`});
+ return h}
+
+/* con texto en el buscador se muestran también los resultados de la otra pestaña */
+function render(){chips();const q=norm(document.getElementById("q").value.trim());
+ const a=tab=="s"?secS(q,fs):secD(q,fd);let h=a;
+ if(q){const b=tab=="s"?secD(q,"all"):secS(q,"all");
+  if(b)h+=`<p class="also">${a?"También en":"Lo encontramos en"} ${tab=="s"?"decants":"perfumes sellados"}</p>`+b}
+ document.getElementById("g").innerHTML=h||"<p class='empty'>No encontramos ese perfume.</p>"}
+document.getElementById("g").addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b)return;
+ const el=b.closest(".ctl"),k=el.dataset.k,d=+b.dataset.a;
+ if(d>0&&!cart[k])add(k);else chg(k,d);
+ const f=el.querySelector('[data-a="1"]');if(f)f.focus({preventScroll:true})});
+if("IntersectionObserver" in window)new IntersectionObserver(([e])=>document.getElementById("stick").classList.toggle("stuck",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.getElementById("sen"));
 
 /* ---------- carrito y descuentos ---------- */
 const tierS=n=>n>=10?3:n>=6?2:n>=3?1:0, tierD=n=>n>=10?3:n>=5?2:n>=2?1:0;
@@ -289,14 +394,24 @@ function calc(){
  const minOk=!np.length||n5>=2||n10>=1;
  return {groups,list,pay,minOk,count:keys.reduce((a,k)=>a+cart[k],0)}}
 
-function add(key,btn){cart[key]=(cart[key]||0)+1;save();upd();
- if(btn){const t=btn.textContent;btn.classList.add("done");btn.textContent="Agregado ✓";setTimeout(()=>{btn.classList.remove("done");btn.textContent=t},900)}}
+function add(key){cart[key]=(cart[key]||0)+1;save();upd();
+ const k=key.split("|");track("carrito-"+k[1]+(k[2]?"-"+k[2]+"ml":""),"Al carrito: "+k[1]+(k[2]?` (${k[2]} ml)`:""))}
 function chg(key,d){cart[key]=(cart[key]||0)+d;if(cart[key]<=0)delete cart[key];save();upd()}
 function clearCart(){cart={};save();upd();closeCart()}
 let vt;function askClear(){const b=document.getElementById("vac");if(b.dataset.s){clearTimeout(vt);delete b.dataset.s;b.textContent="Vaciar carrito";clearCart();return}
  b.dataset.s=1;b.textContent="¿Seguro? Tocá de nuevo";vt=setTimeout(()=>{delete b.dataset.s;b.textContent="Vaciar carrito"},3000)}
 const waLink=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
-function openCart(){document.getElementById("cart").hidden=false}
+/* ---------- estadísticas (GoatCounter) ---------- */
+if(GOATCOUNTER){const g=document.createElement("script");g.async=true;g.src="https://gc.zgo.at/count.js";g.dataset.goatcounter=`https://${GOATCOUNTER}.goatcounter.com/count`;document.head.appendChild(g)}
+function track(path,title){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:path.toLowerCase().replace(/\s+/g,"-"),title:title||path,event:true})}catch(e){}}
+document.addEventListener("click",e=>{const a=e.target.closest("a.wa,a.wal,#waf,.links a");if(!a)return;
+ const n=a.closest(".card")?.querySelector("h3")?.textContent;
+ if(a.id=="waf")track("consulta-whatsapp","Botón Consultanos");
+ else if(a.closest(".links"))track("acceso-"+a.textContent.replace(/[^a-záéíóúñ@.]+/gi," ").trim(),a.textContent.trim());
+ else if(n)track((/Encargar/.test(a.textContent)?"encargo-":"whatsapp-")+n,(/Encargar/.test(a.textContent)?"Encargo: ":"Pedido directo: ")+n)});
+let paso=1;
+function goStep(n){paso=n;upd();document.getElementById("items").scrollTop=0;if(n==2)track("paso-entrega","Pasó a entrega y pago")}
+function openCart(){paso=1;upd();document.getElementById("cart").hidden=false;track("abrir-carrito","Abrió el carrito")}
 function closeCart(){document.getElementById("cart").hidden=true}
 
 function ticket(c){let t="🧾 *PEDIDO FRANSU*\n";
@@ -308,20 +423,52 @@ function ticket(c){let t="🧾 *PEDIDO FRANSU*\n";
  if(c.list>c.pay)t+=`Ahorrás ${fm(c.list-c.pay)} 🎉\n`;
  return t}
 
-function upd(){const c=calc();
+/* ---------- datos del pedido (se guardan solo en el celular del cliente) ---------- */
+let datos={entrega:"",dir:"",pago:""};
+try{datos=Object.assign(datos,JSON.parse(localStorage.getItem("fransu-datos")||"{}"))}catch(e){}
+function setD(k,v){datos[k]=v;try{localStorage.setItem("fransu-datos",JSON.stringify(datos))}catch(e){}
+ if(k=="entrega"){document.getElementById("fzona").hidden=v!="envio";if(v=="envio")document.getElementById("fdir").focus()}
+ const er=document.getElementById("ferr");if(er)er.hidden=true}
+const hx=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function form(c){const r=(k,v,t)=>`<label class="opt"><input type="radio" name="${k}" value="${v}" ${datos[k]==v?"checked":""} onchange="setD('${k}',this.value)">${t}</label>`;
+ return `<div class="frm"><p class="fh">¿Cómo lo recibís y cómo pagás?</p>
+ <div class="fg"><span>Entrega</span>${r("entrega","retiro","📍 Retiro")}${r("entrega","envio","🚚 Envío")}</div>
+ <div id="fzona" ${datos.entrega=="envio"?"":"hidden"}><input class="fin" id="fdir" type="text" placeholder="Calle, número y barrio" autocomplete="street-address" value="${hx(datos.dir)}" oninput="setD('dir',this.value)">
+ <p class="fnote">${c.pay>=65000?"✅ Tu pedido tiene envío gratis en Mendoza":"El envío es gratis desde $65.000; si no llegás, te pasamos el costo"}</p></div>
+ <div class="fg"><span>Pago</span>${r("pago","Efectivo","💵 Efectivo")}${r("pago","Transferencia","🏦 Transferencia")}</div>
+ <p class="warn" id="ferr" hidden>Elegí cómo lo recibís y cómo pagás.</p></div>`}
+function sendOrder(){const c=calc();
+ if(!datos.entrega||!datos.pago||(datos.entrega=="envio"&&!datos.dir.trim())){const er=document.getElementById("ferr");
+  er.textContent=!datos.entrega||!datos.pago?"Elegí cómo lo recibís y cómo pagás.":"Escribí la dirección para el envío.";er.hidden=false;er.scrollIntoView({block:"nearest"});return}
+ let t=ticket(c)+`\n`+
+  (datos.entrega=="envio"?`🚚 Envío a: ${datos.dir.trim()}${c.pay>=65000?" (envío gratis)":""}\n`:`📍 Retiro\n`)+`💳 Pago: ${datos.pago}\n`;
+ track("pedido-enviado",`Pedido enviado (${c.count} u, ${fm(c.pay)})`);
+ window.open(waLink(t),"_blank")}
+
+function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();
  bar.hidden=!c.count;document.body.classList.toggle("hasbar",!!c.count);
- barTot.textContent=fm(c.pay);barN.textContent=c.count;barSave.textContent=c.list>c.pay?`Ahorrás ${fm(c.list-c.pay)}`:"";
+ barTot.textContent=fm(c.pay);barN.textContent=c.count;barSave.textContent=falta<=0?"✓ Envío gratis"+(sv>0?` · Ahorrás ${fm(sv)}`:""):falta<=30000?`Te faltan ${fm(falta)} para el envío gratis`:sv>0?`Ahorrás ${fm(sv)}`:"";
+ if(!c.count||!c.minOk)paso=1;
+ document.getElementById("ctit").textContent=paso==2?"Entrega y pago":"Tu pedido";document.getElementById("vac").hidden=paso==2;
  if(!c.count){items.innerHTML=`<p class="cempty">Tu carrito está vacío. Tocá "Agregar al carrito" en un perfume o "+ 5 ml / + 10 ml" en un decant.</p>`;sum.innerHTML="";return}
+ const tot=`<div class="tot"><span>Total efectivo / transf.</span><span>${fm(c.pay)}</span></div>`;
+ /* paso 2: entrega y pago */
+ if(paso==2){
+  items.innerHTML=`<button class="back" type="button" onclick="goStep(1)">← Volver al pedido</button>${form(c)}`;
+  sum.innerHTML=`<div><span>${c.count} producto${c.count>1?"s":""}</span><span>${sv>0?`Ahorrás ${fm(sv)}`:""}</span></div>${tot}
+  <button class="send" type="button" onclick="sendOrder()">Enviar pedido por WhatsApp</button>`;return}
+ /* paso 1: el pedido */
  items.innerHTML=c.groups.map(g=>`<div class="grp"><div class="gh"><span>${g.title}</span><span>${g.n} u · precio ${g.tier}</span></div>
   ${g.lines.map(l=>`<div class="it"><span class="n">${l.name}${l.enc?" <small>· por encargo</small>":""}</span><span class="pr">${fm(l.unit*l.q)}</span>
   <span class="sub">${fm(l.unit)} c/u${l.unit<l.list?` · <s>${fm(l.list)}</s>`:""}</span>
   <span class="qty"><button onclick="chg('${esc(l.key)}',-1)" aria-label="Quitar uno">−</button><b>${l.q}</b><button onclick="chg('${esc(l.key)}',1)" aria-label="Agregar uno">+</button></span></div>`).join("")}
   ${g.hint?`<div class="hint">💡 ${g.hint}</div>`:""}</div>`).join("");
- sum.innerHTML=`<div><span>Precio de lista</span><span>${fm(c.list)}</span></div>
-  ${c.list>c.pay?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(c.list-c.pay)}</span></div>`:""}
-  <div class="tot"><span>Total efectivo / transf.</span><span>${fm(c.pay)}</span></div>
-  ${c.minOk?`<a class="send" target="_blank" href="${waLink(ticket(c))}">Enviar pedido por WhatsApp</a>`:
-  `<p class="warn">Para decants (salvo Premium) la compra mínima es de 2 decants de 5 ml o 1 de 10 ml. Sumá otro decant de 5 ml o uno de 10 ml para enviar el pedido.</p><span class="send dis">Enviar pedido por WhatsApp</span>`}`}
+ sum.innerHTML=`<div class="ship ${falta<=0?"ok":""}"><span>${falta>0?`🚚 Te faltan <b>${fm(falta)}</b> para el envío gratis en Mendoza`:"🚚 ¡Tenés envío gratis en Mendoza!"}</span><i><u style="width:${Math.min(100,c.pay/FREE*100)}%"></u></i></div>
+  <div><span>Precio de lista</span><span>${fm(c.list)}</span></div>
+  ${sv>0?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(sv)}</span></div>`:""}
+  ${tot}
+  ${c.minOk?`<button class="next" type="button" onclick="goStep(2)">Continuar: entrega y pago →</button>`:
+  `<p class="warn">Para decants (salvo Premium) la compra mínima es de 2 decants de 5 ml o 1 de 10 ml. Sumá otro decant de 5 ml o uno de 10 ml para enviar el pedido.</p><span class="send dis">Continuar: entrega y pago →</span>`}`}
 
 /* ---------- visor con zoom ---------- */
 let sc=1,base=0;const lbs=document.getElementById("lbs"),lbi=document.getElementById("lbi");
@@ -358,14 +505,14 @@ async function get(u){const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.
 async function load(){
  if(LINK_SELLADOS.startsWith("http"))try{const rows=await get(LINK_SELLADOS);
   const P=rows.filter(o=>o.nombre&&num(o["1unidad"])&&!/^no/i.test(o.mostrar||"")).map(o=>({n:o.nombre,g:(o.genero||"U")[0].toUpperCase(),
-   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||""}));
+   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined}));
   if(P.length)PERF=P}catch(e){}
  if(LINK_DECANTS.startsWith("http"))try{const rows=await get(LINK_DECANTS);const ck=c=>/prem/i.test(c)?"P":/insp/i.test(c)?"I":/b/i.test(c)?"B":"A";
   const D=rows.filter(o=>o.nombre&&num(o["10ml1u"])&&!/^no/i.test(o.mostrar||"")).map(o=>({n:o.nombre,k:ck(o.categoria||""),
-   s:/^no/i.test(o.disponible||"")?"AGOTADO":si(o.nuevo)?"NUEVO":"",p5:[num(o["5ml1u"]),num(o["5mlx2"]),num(o["5mlx5"]),num(o["5mlx10"])],p10:[num(o["10ml1u"]),num(o["10mlx2"]),num(o["10mlx5"]),num(o["10mlx10"])],f:o.foto,d:o.descripcion||""}));
+   s:/^no/i.test(o.disponible||"")?"AGOTADO":si(o.nuevo)?"NUEVO":"",p5:[num(o["5ml1u"]),num(o["5mlx2"]),num(o["5mlx5"]),num(o["5mlx10"])],p10:[num(o["10ml1u"]),num(o["10mlx2"]),num(o["10mlx5"]),num(o["10mlx10"])],f:o.foto,d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined}));
   if(D.length)DEC=D}catch(e){}
  idx()}
-document.getElementById("ctl").hidden=false;render();upd();
+document.getElementById("ctl").hidden=false;document.getElementById("stick").hidden=false;render();upd();
 load().then(()=>{render();upd()});
 </script>
 
