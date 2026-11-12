@@ -43,7 +43,7 @@ nav button.on{background:var(--gold);color:var(--bg)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
 .img{height:200px;background:#0a0704;display:flex;align-items:center;justify-content:center;position:relative}
-.img.has{height:auto;aspect-ratio:1/1;background:#000;cursor:zoom-in}.pic{display:block;width:100%;height:100%;object-fit:contain}
+.img.has{height:auto;background:#000;cursor:zoom-in}.pic{display:block;width:100%;height:auto}
 .ph{width:70px;height:120px;border:2px solid var(--gold);border-radius:10px 10px 16px 16px;position:relative;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--display);font-size:26px}
 .ph:before{content:"";position:absolute;top:-18px;width:26px;height:16px;border:2px solid var(--gold);border-radius:4px}
 .ph.d{width:34px;height:110px;border-radius:8px}.ph.d:before{width:18px;top:-14px;height:12px}
@@ -200,6 +200,23 @@ margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px
 .items .frm{margin-top:6px}.items .fg{padding-block:2px}
 .cuo{font-size:13px;color:var(--fg)}.cuo b{font-variant-numeric:tabular-nums}
 .sum .cuo2{color:var(--fg);font-size:13px}.fnote b{color:var(--fg)}
+/* celular: 2 perfumes por fila, tarjetas compactas */
+@media (max-width:600px){
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{border-radius:12px}
+.body{padding:10px;gap:5px}.body h3{font-size:16px;line-height:1.15}
+.cat{font-size:9.5px;letter-spacing:.4px}
+.desc{font-size:11.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price b{font-size:18px}.price span{display:none}
+.cuo,.from{font-size:11px;line-height:1.3}
+details.tiers summary{font-size:11px}details.tiers td,details.tiers th{font-size:11px;padding:2px 0}
+.p2 b{font-size:16px}.p2 span{font-size:11px}
+.row{gap:6px}.row.r2{flex-direction:column}
+.add,.wa{font-size:13px;padding:10px 6px}.ctl .add,.step{min-height:40px}
+.wal{font-size:11px;text-align:center;padding:0 2px}
+.tag{top:6px;left:6px;font-size:9px;padding:3px 6px;letter-spacing:.2px}.tag.MV{left:auto;right:6px}
+.ctl:only-child .step button,.row.r2 .step button{width:38px}.step small{font-size:9px}
+}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:no-preference){.add{transition:background .2s}}
 </style>
@@ -271,6 +288,8 @@ const GOATCOUNTER = "";
 const CATS=[{k:"A",n:"Categoría A"},{k:"B",n:"Categoría B"},{k:"P",n:"Premium"},{k:"I",n:"Inspiración de Perfumista"}];
 let GEN={},FOTO={};function idx(){GEN={};FOTO={};PERF.forEach(p=>{GEN[p.n]=p.g;if(p.f)FOTO[p.n]=p.f});DEC.forEach(p=>{if(p.f)FOTO[p.n]=p.f})}idx();
 const GN={M:"Masculinos",F:"Femeninos",U:"Unisex"};
+/* Medidas de cada foto (ancho, alto): reservan el lugar exacto antes de que cargue, sin franjas ni saltos. Una foto nueva que no esté acá igual se ve bien. */
+const DIM={"9am-dive.jpg":[720,900],"9pm-elixir.jpg":[600,900],"9pm-night-out.jpg":[900,654],"9pm.jpg":[600,900],"amber-aqua.jpg":[750,900],"amber-dubai-night.jpg":[600,900],"amber-gold.jpg":[600,900],"art-universe.jpg":[750,900],"asad-bourbon.jpg":[750,900],"asad-elixir.jpg":[900,600],"asad.jpg":[900,600],"atlantis.jpg":[750,900],"atlas.jpg":[750,900],"badee-sublime.jpg":[900,720],"cdn-intense.jpg":[600,900],"cdn-precieux.jpg":[600,900],"cdn-untold.jpg":[600,900],"chaos.jpg":[900,792],"ck-one.jpg":[750,900],"erba-pura.jpg":[600,900],"fakhar.jpg":[900,720],"hawas-fire.jpg":[600,900],"hawas-him.jpg":[900,720],"hawas-ice.jpg":[900,720],"hawas-malibu.jpg":[600,900],"hawas-overdose.jpg":[600,900],"hawas-tropical.jpg":[600,900],"her-confession.jpg":[600,900],"his-confession.jpg":[600,900],"homme-black.jpg":[900,720],"homme-white.jpg":[900,720],"honor-glory.jpg":[900,900],"ishq.jpg":[600,900],"jean-lowe.jpg":[600,900],"khamrah.jpg":[900,707],"kingdom-mujer.jpg":[600,900],"kingdom.jpg":[900,900],"le-male.jpg":[720,900],"limoni.jpg":[750,900],"liquid-brun.jpg":[600,900],"mandarin-elixir.jpg":[900,720],"mandarin.jpg":[900,675],"mango.jpg":[750,900],"mayar-cherry.jpg":[1024,1536],"mega.jpg":[900,675],"odyssey-aqua.jpg":[900,720],"opulent.jpg":[900,675],"oud-wood.jpg":[600,900],"pacific-blue.jpg":[600,900],"philos-pura.jpg":[900,720],"rome.jpg":[900,675],"salvo-elixir.jpg":[600,900],"salvo.jpg":[600,900],"spectre.jpg":[600,900],"tmw.jpg":[600,900],"torino21.jpg":[600,900],"turathi.jpg":[900,600],"urban-elixir.jpg":[900,850],"victoria.jpg":[635,900],"vintage-radio.jpg":[744,900],"vulcan.jpg":[900,850],"yara-candy.jpg":[900,720],"yara-pink.jpg":[900,720]};
 const pic=n=>FOTO[n]?"img/"+FOTO[n]:null, big=pic;
 const fm=n=>"$"+Math.round(n).toLocaleString("es-AR");
 let tab="s",fs="all",fd="all",ord="asc";
@@ -282,7 +301,7 @@ function save(){try{localStorage.setItem("fransu-cart",JSON.stringify(cart))}cat
 function show(t){tab=t;b1.classList.toggle("on",t=="s");b2.classList.toggle("on",t=="d");render();toCat()}
 const isMV=(p,d)=>p.mv===undefined?(d?MV_D:MV_S).has(p.n):p.mv;
 function media(n,d,s,mv){const src=pic(n);
- return `<div class="img ${src?"has":""}" ${src?`onclick="zoom('${n.replace(/'/g,"\\'")}')"`:""}>${src?`<img class="pic" src="${src}" alt="${n}" loading="lazy" decoding="async">`:`<div class="ph ${d?"d":""}">${d?"":"F"}</div>`}${s?`<span class="tag ${s}">${s}</span>`:""}${mv?`<span class="tag MV">★ MÁS VENDIDO</span>`:""}</div>`}
+ return `<div class="img ${src?"has":""}" ${src?`onclick="zoom('${n.replace(/'/g,"\\'")}')"`:""}>${src?`<img class="pic" src="${src}" alt="${n}" ${DIM[FOTO[n]]?`width="${DIM[FOTO[n]][0]}" height="${DIM[FOTO[n]][1]}"`:""} loading="lazy" decoding="async">`:`<div class="ph ${d?"d":""}">${d?"":"F"}</div>`}${s?`<span class="tag ${s}">${s}</span>`:""}${mv?`<span class="tag MV">★ MÁS VENDIDO</span>`:""}</div>`}
 const esc=s=>s.replace(/'/g,"\\'");
 
 const cntS=k=>k=="all"?PERF.length:PERF.filter(p=>(GEN[p.n]||"U")==k).length, cntD=k=>k=="all"?DEC.length:DEC.filter(p=>p.k==k).length;
@@ -367,13 +386,13 @@ function secD(q,f){let h="";
  const L=["1 unidad","x2","x5","x10"];
  CATS.filter(c=>f=="all"||f==c.k).forEach(c=>{const items=srt(DEC.filter(p=>p.k==c.k&&norm(p.n+" "+dsc(p)).includes(q)),p=>p.p10[0]*100+p.p5[0]/1000);if(!items.length)return;
  const promo=s=>{const v=i=>{const a=items.map(p=>p["p"+s][i]);return a.every(x=>x==a[0])?fm(a[0])+" c/u":"según perfume"};return `<div class="promo"><b>${s} ml</b><span>x2 ${v(1)}</span><span>x5 ${v(2)}</span><span>x10 ${v(3)}</span></div>`};
- h+=`<section class="sec"><div class="shead"><h2>${c.n}</h2><span class="cnt">${items.length} decant${items.length>1?"s":""}</span><p>Promos combinables entre los decants de esta categoría (5 ml y 10 ml suman por separado)</p><p class="min">${c.k=="P"?"Sin compra mínima":"Compra mínima: 2 decants de 5 ml o 1 de 10 ml"}</p>${promo("5")}${promo("10")}${(()=>{const e=items.filter(p=>p.s!="AGOTADO").slice(0,2);return e.length==2?`<span class="ex">Ejemplo: ${e[0].n} + ${e[1].n} de 5 ml = <b>${fm(e[0].p5[1]+e[1].p5[1])}</b> en total</span>`:""})()}</div><div class="grid">`;
+ h+=`<section class="sec"><div class="shead"><h2>${c.n}</h2><span class="cnt">${items.length} decant${items.length>1?"s":""}</span><p>Promos combinables entre los decants de esta categoría (5 ml y 10 ml suman por separado)</p><p class="min">${c.k=="P"?"Sin compra mínima":"Compra mínima: 2 decants de 5 ml o 1 de 10 ml"}</p>${c.k=="P"?"":`<p class="min">¿Combinás categorías? Llevando 2: ${fm(MIX2)} menos c/u · Llevando 5 o más: ${fm(MIX5)} menos c/u</p>`}${promo("5")}${promo("10")}${(()=>{const e=items.filter(p=>p.s!="AGOTADO").slice(0,2);return e.length==2?`<span class="ex">Ejemplo: ${e[0].n} + ${e[1].n} de 5 ml = <b>${fm(e[0].p5[1]+e[1].p5[1])}</b> en total</span>`:""})()}</div><div class="grid">`;
  items.forEach(p=>{
   h+=`<div class="card">${media(p.n,1,p.s,p.s!="AGOTADO"&&isMV(p,1))}<div class="body"><span class="cat">Decant · ${c.n}</span><h3>${p.n}</h3>${dsc(p)?`<p class="desc">${dsc(p)}</p>`:""}
   <div class="p2"><div><span>5 ml</span><b>${fm(p.p5[0])}</b></div><div><span>10 ml</span><b>${fm(p.p10[0])}</b></div></div>
   ${p.p5[3]&&p.p5[3]<p.p5[0]?`<span class="from">Desde ${fm(p.p5[3])} los 5 ml llevando varios</span>`:""}
   <details class="tiers"><summary>Ver precios por cantidad</summary><table class="two"><tr><th></th><th>5 ml</th><th>10 ml</th></tr>${L.map((l,i)=>`<tr><td>${l}</td><td>${fm(p.p5[i])}</td><td>${fm(p.p10[i])}</td></tr>`).join("")}</table></details>
-  <div class="row">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:ctl("d|"+p.n+"|5","+ 5 ml")+ctl("d|"+p.n+"|10","+ 10 ml")}</div>
+  <div class="row r2">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:ctl("d|"+p.n+"|5","+ 5 ml")+ctl("d|"+p.n+"|10","+ 10 ml")}</div>
   </div></div>`});
  h+=`</div></section>`});
  return h}
@@ -394,6 +413,10 @@ if("IntersectionObserver" in window)new IntersectionObserver(([e])=>document.get
 const tierS=n=>n>=10?3:n>=6?2:n>=3?1:0, tierD=n=>n>=10?3:n>=5?2:n>=2?1:0;
 const TS=["1 unidad","x3","x6","x10"], TD=["1 unidad","x2","x5","x10"];
 function find(key){const [t,n,ml]=key.split("|");return t=="s"?{t,ml:null,p:PERF.find(x=>x.n==n)}:{t,ml,p:DEC.find(x=>x.n==n)}}
+/* Decants de categorías distintas:
+   - 2 decants en total, uno de cada categoría: precio de 1 unidad menos MIX2 cada uno.
+   - 5 o más del mismo tamaño entre categorías distintas (sin contar Premium): MIX5 menos por decant sobre el precio de su promo. */
+const MIX2=500, MIX5=300;
 function calc(){
  const groups=[];let list=0,pay=0;
  const keys=Object.keys(cart).filter(k=>cart[k]>0&&find(k).p);
@@ -406,15 +429,16 @@ function calc(){
  // decants por categoría y tamaño
  const dk=keys.filter(k=>k[0]=="d");
  const byG={};dk.forEach(k=>{const f=find(k);const g=f.p.k+"|"+f.ml;(byG[g]=byG[g]||[]).push(k)});
+ // decants de categorías distintas (sin contar Premium): MIX_DESC menos por decant, sobre el precio de su promo
  const totalD=dk.reduce((a,k)=>a+cart[k],0);
- const cats=new Set(dk.map(k=>find(k).p.k));
- const mixed=totalD==2&&cats.size==2; // 2 decants de categorías distintas: x1 − $500 c/u
+ const mix2=totalD==2&&new Set(dk.map(k=>find(k).p.k)).size==2;
+ const mixN={},mixC={};dk.forEach(k=>{const f=find(k);if(f.p.k=="P")return;mixN[f.ml]=(mixN[f.ml]||0)+cart[k];(mixC[f.ml]=mixC[f.ml]||new Set()).add(f.p.k)});
  CATS.forEach(c=>["5","10"].forEach(ml=>{const ks=byG[c.k+"|"+ml];if(!ks)return;
-  const n=ks.reduce((a,k)=>a+cart[k],0),ti=tierD(n);
-  const lines=ks.map(k=>{const p=find(k).p,q=cart[k],a=p["p"+ml];return {key:k,name:p.n+" · "+ml+" ml",q,unit:mixed?a[0]-500:a[ti],list:a[0]}});
+  const n=ks.reduce((a,k)=>a+cart[k],0),ti=tierD(n),mc=!mix2&&c.k!="P"&&(mixC[ml]||new Set()).size>=2,mx=mc&&mixN[ml]>=5;
+  const lines=ks.map(k=>{const p=find(k).p,q=cart[k],a=p["p"+ml];return {key:k,name:p.n+" · "+ml+" ml",q,unit:mix2?a[0]-MIX2:a[ti]-(mx?MIX5:0),list:a[0]}});
   const next=[2,5,10].find(x=>x>n);
-  groups.push({title:`Decants ${c.n} · ${ml} ml`,n,tier:mixed?"combinado":TD[ti],lines,
-   hint:mixed?"Llevás 2 decants de categorías distintas: $500 menos cada uno.":next?`Sumá ${next-n} decant${next-n>1?"s":""} más de ${c.n} de ${ml} ml y pagás a precio ${TD[tierD(next)]}.`:""})}));
+  groups.push({title:`Decants ${c.n} · ${ml} ml`,n,tier:mix2?"combinado":TD[ti]+(mx?` − ${fm(MIX5)}`:""),lines,
+   hint:mix2?`Llevás 2 decants de categorías distintas: ${fm(MIX2)} menos cada uno.`:(mx?`Llevás ${mixN[ml]} decants de ${ml} ml de categorías distintas: ${fm(MIX5)} menos por decant. `:mc?`Con ${5-mixN[ml]} decant${5-mixN[ml]>1?"s":""} más de ${ml} ml (de A, B o Inspiración) tenés ${fm(MIX5)} menos en cada uno. `:"")+(next?`Sumá ${next-n} decant${next-n>1?"s":""} más de ${c.n} de ${ml} ml y pagás a precio ${TD[tierD(next)]}.`:"")})}));
  groups.forEach(g=>g.lines.forEach(l=>{list+=l.list*l.q;pay+=l.unit*l.q}));
  const np=dk.filter(k=>find(k).p.k!="P"),n5=np.filter(k=>find(k).ml=="5").reduce((a,k)=>a+cart[k],0),n10=np.filter(k=>find(k).ml=="10").reduce((a,k)=>a+cart[k],0);
  const minOk=!np.length||n5>=2||n10>=1;
