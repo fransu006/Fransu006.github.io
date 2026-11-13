@@ -234,7 +234,7 @@ details.tiers summary{font-size:11px}details.tiers td,details.tiers th{font-size
 <li>🚚 <b>Envío gratis</b> en Mendoza desde $65.000</li>
 <li>📍 Retiro a 2 cuadras de la terminal</li>
 <li>💳 <b>3 cuotas sin interés</b> con tarjeta</li>
-<li>💵 Efectivo o transferencia</li>
+<li id="tcash">💵 <b>18% OFF</b> en efectivo o transferencia</li>
 </ul>
 <div class="links" role="navigation" aria-label="Accesos rápidos"><a href="#opiniones">⭐ Opiniones de clientes</a><a href="#faq">❓ Preguntas frecuentes</a><a href="https://instagram.com/fransu.perfumes" target="_blank" rel="noopener">📸 @fransu.perfumes</a></div></header>
 <section class="ops" id="opiniones" aria-label="Opiniones de clientes"><div class="shead"><h2>Clientes contentos</h2><p>Experiencias reales. Tocá la captura para verla grande.</p></div>
@@ -493,7 +493,7 @@ function form(c){const r=(k,v,t)=>`<label class="opt"><input type="radio" name="
  <div id="fzona" ${datos.entrega=="envio"?"":"hidden"}><input class="fin" id="fdir" type="text" placeholder="Calle, número y barrio" autocomplete="street-address" value="${hx(datos.dir)}" oninput="setD('dir',this.value)">
  <p class="fnote">${c.pay>=65000?"✅ Tu pedido tiene envío gratis en Mendoza":"El envío es gratis desde $65.000; si no llegás, te pasamos el costo"}</p></div>
  <div class="fg"><span>Pago</span>${r("pago","Efectivo","💵 Efectivo")}${r("pago","Transferencia","🏦 Transferencia")}${CUOTAS?r("pago","Tarjeta",`💳 Tarjeta · ${CUOTAS} cuotas`):""}</div>
- ${datos.pago=="Tarjeta"&&CUOTAS?`<p class="fnote">Con tarjeta de crédito pagás en ${CUOTAS} cuotas sin interés de <b>${fm(tarj(c.pay).q)}</b>. Se cobra por aproximación al recibir o retirar el pedido.</p>`:""}
+ ${datos.pago=="Tarjeta"&&CUOTAS?`<p class="fnote">Con tarjeta de crédito pagás en ${CUOTAS} cuotas sin interés de <b>${fm(tarj(c.pay).q)}</b>. Se cobra por aproximación al recibir o retirar el pedido.<br>💵 En efectivo o transferencia tenés <b>${Math.round((1-c.pay/tarj(c.pay).t)*100)}% OFF</b>: pagás ${fm(c.pay)} y ahorrás ${fm(tarj(c.pay).t-c.pay)}.</p>`:""}
  <p class="warn" id="ferr" hidden>Elegí cómo lo recibís y cómo pagás.</p></div>`}
 function sendOrder(){const c=calc();
  if(datos.pago=="Tarjeta"&&!CUOTAS)datos.pago="";
@@ -511,24 +511,28 @@ function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();
  if(!c.count||!c.minOk)paso=1;
  document.getElementById("ctit").textContent=paso==2?"Entrega y pago":"Tu pedido";document.getElementById("vac").hidden=paso==2;
  if(!c.count){items.innerHTML=`<p class="cempty">Tu carrito está vacío. Tocá "Agregar al carrito" en un perfume o "+ 5 ml / + 10 ml" en un decant.</p>`;sum.innerHTML="";return}
- const T=tarj(c.pay),card=datos.pago=="Tarjeta"&&CUOTAS;
+ const T=tarj(c.pay),card=datos.pago=="Tarjeta"&&CUOTAS,L=Math.max(tarj(c.list).t,T.t),offP=Math.round((1-c.pay/T.t)*100);
  const tot=`<div class="tot"><span>Total efectivo / transf.</span><span>${fm(c.pay)}</span></div>`;
+ const desg=`<div><span>Precio de lista</span><span>${fm(L)}</span></div>
+  ${L>T.t?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(L-T.t)}</span></div>`:""}
+  <div class="save"><span>${offP}% OFF en efectivo / transf.</span><span>−${fm(T.t-c.pay)}</span></div>`;
  const cuo=CUOTAS?`<div class="cuo2"><span>💳 Con tarjeta</span><span>${CUOTAS} cuotas sin interés de ${fm(T.q)}</span></div>`:"";
  /* paso 2: entrega y pago */
  if(paso==2){
   items.innerHTML=`<button class="back" type="button" onclick="goStep(1)">← Volver al pedido</button>${form(c)}`;
-  sum.innerHTML=`<div><span>${c.count} producto${c.count>1?"s":""}</span><span>${sv>0?`Ahorrás ${fm(sv)}`:""}</span></div>${card?`<div><span>En efectivo / transf.</span><span>${fm(c.pay)}</span></div>
-  <div class="tot"><span>Total con tarjeta</span><span>${fm(T.t)}</span></div><div class="save"><span>${CUOTAS} cuotas sin interés de</span><span>${fm(T.q)}</span></div>`:tot+cuo}
+  sum.innerHTML=`<div><span>${c.count} producto${c.count>1?"s":""}</span><span>${sv>0&&!CUOTAS?`Ahorrás ${fm(sv)}`:""}</span></div>${card?`<div class="tot"><span>Total con tarjeta</span><span>${fm(T.t)}</span></div><div class="cuo2"><span>💳 ${CUOTAS} cuotas sin interés de</span><span>${fm(T.q)}</span></div>
+  <div class="save"><span>💵 ${offP}% OFF en efectivo / transf.</span><span>${fm(c.pay)}</span></div>`:(CUOTAS?desg:"")+tot+cuo}
   <button class="send" type="button" onclick="sendOrder()">Enviar pedido por WhatsApp</button>`;return}
  /* paso 1: el pedido */
  items.innerHTML=c.groups.map(g=>`<div class="grp"><div class="gh"><span>${g.title}</span><span>${g.n} u · precio ${g.tier}</span></div>
   ${g.lines.map(l=>`<div class="it"><span class="n">${l.name}${l.enc?" <small>· por encargo</small>":""}</span><span class="pr">${fm(l.unit*l.q)}</span>
-  <span class="sub">${fm(l.unit)} c/u${l.unit<l.list?` · <s>${fm(l.list)}</s>`:""}</span>
+  <span class="sub">${fm(l.unit)} c/u · ${CUOTAS?`lista <s>${fm(tarj(l.list).t)}</s>`:l.unit<l.list?`<s>${fm(l.list)}</s>`:""}</span>
   <span class="qty"><button onclick="chg('${esc(l.key)}',-1)" aria-label="Quitar uno">−</button><b>${l.q}</b><button onclick="chg('${esc(l.key)}',1)" aria-label="Agregar uno">+</button></span></div>`).join("")}
   ${g.hint?`<div class="hint">💡 ${g.hint}</div>`:""}</div>`).join("");
  sum.innerHTML=`<div class="ship ${falta<=0?"ok":""}"><span>${falta>0?`🚚 Te faltan <b>${fm(falta)}</b> para el envío gratis en Mendoza`:"🚚 ¡Tenés envío gratis en Mendoza!"}</span><i><u style="width:${Math.min(100,c.pay/FREE*100)}%"></u></i></div>
-  <div><span>Precio de lista</span><span>${fm(c.list)}</span></div>
-  ${sv>0?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(sv)}</span></div>`:""}
+  ${CUOTAS?desg:
+  `<div><span>Precio de lista</span><span>${fm(c.list)}</span></div>
+  ${sv>0?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(sv)}</span></div>`:""}`}
   ${tot}${cuo}
   ${c.minOk?`<button class="next" type="button" onclick="goStep(2)">Continuar: entrega y pago →</button>`:
   `<p class="warn">Para decants (salvo Premium) la compra mínima es de 2 decants de 5 ml o 1 de 10 ml. Sumá otro decant de 5 ml o uno de 10 ml para enviar el pedido.</p><span class="send dis">Continuar: entrega y pago →</span>`}`}
@@ -575,6 +579,7 @@ async function load(){
    s:/^no/i.test(o.disponible||"")?"AGOTADO":si(o.nuevo)?"NUEVO":"",p5:[num(o["5ml1u"]),num(o["5mlx2"]),num(o["5mlx5"]),num(o["5mlx10"])],p10:[num(o["10ml1u"]),num(o["10mlx2"]),num(o["10mlx5"]),num(o["10mlx10"])],f:o.foto,d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined}));
   if(D.length)DEC=D}catch(e){}
  idx()}
+document.getElementById("tcash").innerHTML=CUOTAS?`💵 <b>${Math.round((1-1/RECARGO_TARJETA)*100)}% OFF</b> en efectivo o transferencia`:"💵 Efectivo o transferencia";
 document.getElementById("ctl").hidden=false;document.getElementById("stick").hidden=false;render();upd();
 load().then(()=>{render();upd()});
 </script>
