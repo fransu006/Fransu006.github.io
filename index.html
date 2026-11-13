@@ -472,11 +472,20 @@ function closeCart(){document.getElementById("cart").hidden=true}
 function ticket(c,card){let t="🧾 *PEDIDO FRANSU*\n";
  c.groups.forEach(g=>{t+=`\n*${g.title}* (${g.n} u · precio ${g.tier})\n`;
   g.lines.forEach(l=>{t+=`• ${l.q} × ${l.name}${l.enc?" (por encargo)":""} — ${fm(l.unit)}${l.q>1?` c/u = ${fm(l.unit*l.q)}`:""}\n`})});
- t+=`\nPrecio de lista: ${fm(c.list)}\n`;
- if(c.list>c.pay)t+=`Descuento por cantidad: −${fm(c.list-c.pay)}\n`;
- if(card){const T=tarj(c.pay);t+=`Total efectivo / transferencia: ${fm(c.pay)}\n*TOTAL con tarjeta de crédito: ${fm(T.t)}*\n*${CUOTAS} cuotas sin interés de ${fm(T.q)}*\n`}
- else t+=`*TOTAL efectivo / transferencia: ${fm(c.pay)}*\n`;
- if(c.list>c.pay)t+=`Ahorrás ${fm(c.list-c.pay)} 🎉\n`;
+ if(!CUOTAS){t+=`\nPrecio de lista: ${fm(c.list)}\n`;
+  if(c.list>c.pay)t+=`Descuento por cantidad: −${fm(c.list-c.pay)}\n`;
+  t+=`*TOTAL efectivo / transferencia: ${fm(c.pay)}*\n`;
+  if(c.list>c.pay)t+=`Ahorrás ${fm(c.list-c.pay)} 🎉\n`;
+  return t}
+ // precio de lista = precio con tarjeta; en efectivo / transferencia se descuenta el porcentaje
+ const T=tarj(c.pay),L=Math.max(tarj(c.list).t,T.t),off=Math.round((1-c.pay/T.t)*100);
+ if(card)t+=`(Los precios por unidad de arriba son en efectivo / transferencia)\n`;
+ t+=`\nPrecio de lista: ${fm(L)}\n`;
+ if(L>T.t)t+=`Descuento por cantidad: −${fm(L-T.t)}\n`;
+ if(card){t+=`*TOTAL con tarjeta de crédito: ${fm(T.t)}*\n*${CUOTAS} cuotas sin interés de ${fm(T.q)}*\n`;
+  if(L>T.t)t+=`Ahorrás ${fm(L-T.t)} 🎉\n`;
+  t+=`En efectivo / transferencia (${off}% OFF): ${fm(c.pay)}\n`}
+ else t+=`${off}% OFF en efectivo / transferencia: −${fm(T.t-c.pay)}\n*TOTAL efectivo / transferencia: ${fm(c.pay)}*\nAhorrás ${fm(L-c.pay)} 🎉\n`;
  return t}
 
 /* ---------- datos del pedido (se guardan solo en el celular del cliente) ---------- */
@@ -520,7 +529,9 @@ function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();
  /* paso 2: entrega y pago */
  if(paso==2){
   items.innerHTML=`<button class="back" type="button" onclick="goStep(1)">← Volver al pedido</button>${form(c)}`;
-  sum.innerHTML=`<div><span>${c.count} producto${c.count>1?"s":""}</span><span>${sv>0&&!CUOTAS?`Ahorrás ${fm(sv)}`:""}</span></div>${card?`<div class="tot"><span>Total con tarjeta</span><span>${fm(T.t)}</span></div><div class="cuo2"><span>💳 ${CUOTAS} cuotas sin interés de</span><span>${fm(T.q)}</span></div>
+  sum.innerHTML=`<div><span>${c.count} producto${c.count>1?"s":""}</span><span>${sv>0&&!CUOTAS?`Ahorrás ${fm(sv)}`:""}</span></div>${card?`<div><span>Precio de lista</span><span>${fm(L)}</span></div>
+  ${L>T.t?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(L-T.t)}</span></div>`:""}
+  <div class="tot"><span>Total con tarjeta</span><span>${fm(T.t)}</span></div><div class="cuo2"><span>💳 ${CUOTAS} cuotas sin interés de</span><span>${fm(T.q)}</span></div>
   <div class="save"><span>💵 ${offP}% OFF en efectivo / transf.</span><span>${fm(c.pay)}</span></div>`:(CUOTAS?desg:"")+tot+cuo}
   <button class="send" type="button" onclick="sendOrder()">Enviar pedido por WhatsApp</button>`;return}
  /* paso 1: el pedido */
