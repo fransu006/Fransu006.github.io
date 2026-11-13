@@ -200,6 +200,10 @@ margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px
 .items .frm{margin-top:6px}.items .fg{padding-block:2px}
 .cuo{font-size:13px;color:var(--fg)}.cuo b{font-variant-numeric:tabular-nums}
 .sum .cuo2{color:var(--fg);font-size:13px}.fnote b{color:var(--fg)}
+/* precio: descuento en efectivo sobre el precio de lista (tarjeta) */
+.price{align-items:center}
+.price .off{background:var(--ok);color:#08200c;font-weight:800;font-size:12px;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.cash{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 /* celular: 2 perfumes por fila, tarjetas compactas */
 @media (max-width:600px){
 .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -207,7 +211,7 @@ margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px
 .body{padding:10px;gap:5px}.body h3{font-size:16px;line-height:1.15}
 .cat{font-size:9.5px;letter-spacing:.4px}
 .desc{font-size:11.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.price b{font-size:18px}.price span{display:none}
+.price b{font-size:18px}.price span{display:none}.price .off{display:inline-block;font-size:10px;padding:2px 6px}.cash{font-size:10.5px;line-height:1.3}
 .cuo,.from{font-size:11px;line-height:1.3}
 details.tiers summary{font-size:11px}details.tiers td,details.tiers th{font-size:11px;padding:2px 0}
 .p2 b{font-size:16px}.p2 span{font-size:11px}
@@ -368,8 +372,9 @@ function secS(q,f){let h="";
  const card=p=>{const ag=p.s=="AGOTADO";
   return `<div class="card ${ag?"off":""}">${media(p.n,0,ag?"":p.s,!ag&&isMV(p,0))}<div class="body"><span class="cat">Sellado · ${{M:"Masculino",F:"Femenino",U:"Unisex"}[GEN[p.n]||"U"]}${p.ml?` · <span class="ml">${p.ml}</span>`:""}</span><h3>${p.n}</h3>
   ${dsc(p)?`<p class="desc">${dsc(p)}</p>`:""}
-  <div class="price"><b>${fm(p.p[0])}</b><span>1 unidad</span></div>
-  ${CUOTAS?`<span class="cuo">💳 o ${CUOTAS} cuotas sin interés de <b>${fm(tarj(p.p[0]).q)}</b></span>`:""}
+  ${CUOTAS?(()=>{const T=tarj(p.p[0]),off=Math.round((1-p.p[0]/T.t)*100);return `<div class="price"><b>${fm(p.p[0])}</b><span class="off">${off}% OFF</span></div>
+  <span class="cash">Lista <s>${fm(T.t)}</s> · en efectivo o transferencia</span>
+  <span class="cuo">💳 o ${CUOTAS} cuotas sin interés de <b>${fm(T.q)}</b></span>`})():`<div class="price"><b>${fm(p.p[0])}</b><span>1 unidad</span></div>`}
   <span class="from">Desde ${fm(p.p[3])} c/u llevando varios</span>
   <details class="tiers"><summary>Ver precios por cantidad</summary><table>
   <tr><td>1 unidad</td><td>${fm(p.p[0])}</td></tr><tr><td>Llevando 3 surtidos</td><td>${fm(p.p[1])} c/u</td></tr>
