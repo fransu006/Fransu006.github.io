@@ -204,6 +204,20 @@ margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px
 .price{align-items:center}
 .price .off{background:var(--ok);color:#08200c;font-weight:800;font-size:12px;padding:3px 9px;border-radius:20px;white-space:nowrap}
 .cash{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+/* encabezado: lo secundario va plegado en "Ver más" */
+header{padding-block:22px 12px}
+.more{margin-top:10px}.more summary{list-style:none;display:inline-block;cursor:pointer;color:var(--gold);font-weight:700;font-size:13px;padding:6px 14px;border:1px solid var(--line);border-radius:20px}
+.more summary::-webkit-details-marker{display:none}.more .mc,.more[open] .mo{display:none}.more[open] .mc{display:inline}
+.more p{margin-top:12px}.more .trust{margin-top:10px}
+/* cartel de promos (se maneja desde la pestaña "Promos" de la planilla) */
+#promo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 12px;text-align:center;background:#000;border-bottom:2px solid var(--gold);
+margin:0 calc(-1*var(--pr)) 0 calc(-1*var(--pl));padding:calc(12px + env(safe-area-inset-top,0px)) var(--pr) 12px var(--pl)}
+#promo .pt{width:100%;font-family:var(--display);font-size:24px;letter-spacing:3px;color:var(--gold);line-height:1.1}
+#promo .px{font-weight:700;font-size:14px;line-height:1.35}#promo .pf{font-size:12px;color:var(--muted);white-space:nowrap}
+#promo button{border:0;background:var(--gold);color:#000;font-weight:800;font-size:13px;padding:8px 16px;border-radius:20px}
+.price .off.hot{background:#e5484d;color:#fff}.pline{font-size:12px;font-weight:700;color:#ff9a9d}
+.minw{margin:0;font-size:12px;line-height:1.3;color:var(--gold);font-weight:700}
+#bar .info span.bw{color:var(--gold)}
 /* celular: 2 perfumes por fila, tarjetas compactas */
 @media (max-width:600px){
 .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -212,7 +226,7 @@ margin:14px calc(-1*var(--pr)) 12px calc(-1*var(--pl));padding:8px var(--pr) 8px
 .cat{font-size:9.5px;letter-spacing:.4px}
 .desc{font-size:11.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .price b{font-size:18px}.price span{display:none}.price .off{display:inline-block;font-size:10px;padding:2px 6px}.cash{font-size:10.5px;line-height:1.3}
-.cuo,.from{font-size:11px;line-height:1.3}
+.cuo,.from,.pline{font-size:11px;line-height:1.3}.minw{font-size:10.5px}
 details.tiers summary{font-size:11px}details.tiers td,details.tiers th{font-size:11px;padding:2px 0}
 .p2 b{font-size:16px}.p2 span{font-size:11px}
 .row{gap:6px}.row.r2{flex-direction:column}
@@ -226,17 +240,21 @@ details.tiers summary{font-size:11px}details.tiers td,details.tiers th{font-size
 </style>
 </head>
 <body>
+<div id="promo" hidden></div>
 
 
-<header><small>✦ PERFUMES ÁRABES Y DE DISEÑADOR ORIGINALES ✦</small><h1>FRANSU</h1><p>Armá tu pedido, mirá cuánto ahorrás por cantidad y mandalo por WhatsApp · Envío gratis en Mendoza desde $65.000</p>
+<header><small>✦ PERFUMES ÁRABES Y DE DISEÑADOR ORIGINALES ✦</small><h1>FRANSU</h1>
 <ul class="trust" aria-label="Por qué comprar en FRANSU">
-<li><a href="#original">✔ <b>Sellados originales</b> · cómo comprobarlo ›</a></li>
-<li>🚚 <b>Envío gratis</b> en Mendoza desde $65.000</li>
-<li>📍 Retiro a 2 cuadras de la terminal</li>
+<li><a href="#original">✔ <b>Perfumes originales</b> · cómo comprobarlo ›</a></li>
 <li>💳 <b>3 cuotas sin interés</b> con tarjeta</li>
 <li id="tcash">💵 <b>18% OFF</b> en efectivo o transferencia</li>
+<li>📍 Ubicados a 2 cuadras de la terminal</li>
 </ul>
-<div class="links" role="navigation" aria-label="Accesos rápidos"><a href="#opiniones">⭐ Opiniones de clientes</a><a href="#faq">❓ Preguntas frecuentes</a><a href="https://instagram.com/fransu.perfumes" target="_blank" rel="noopener">📸 @fransu.perfumes</a></div></header>
+<details class="more"><summary><span class="mo">Ver más ▾</span><span class="mc">Ver menos ▴</span></summary>
+<p>Armá tu pedido, mirá cuánto ahorrás por cantidad y mandalo por WhatsApp.</p>
+<ul class="trust"><li>🚚 <b>Envío gratis</b> en Mendoza desde $65.000</li></ul>
+<div class="links" role="navigation" aria-label="Accesos rápidos"><a href="#opiniones">⭐ Opiniones de clientes</a><a href="#faq">❓ Preguntas frecuentes</a><a href="https://instagram.com/fransu.perfumes" target="_blank" rel="noopener">📸 @fransu.perfumes</a></div>
+</details></header>
 <section class="ops" id="opiniones" aria-label="Opiniones de clientes"><div class="shead"><h2>Clientes contentos</h2><p>Experiencias reales. Tocá la captura para verla grande.</p></div>
 <div class="opr">
 <figure style="margin:0"><video src="img/cliente-video.mp4" poster="img/cliente-video.jpg" controls playsinline preload="none" aria-label="Video de un cliente recomendando FRANSU"></video></figure>
@@ -308,8 +326,9 @@ function media(n,d,s,mv){const src=pic(n);
  return `<div class="img ${src?"has":""}" ${src?`onclick="zoom('${n.replace(/'/g,"\\'")}')"`:""}>${src?`<img class="pic" src="${src}" alt="${n}" ${DIM[FOTO[n]]?`width="${DIM[FOTO[n]][0]}" height="${DIM[FOTO[n]][1]}"`:""} loading="lazy" decoding="async">`:`<div class="ph ${d?"d":""}">${d?"":"F"}</div>`}${s?`<span class="tag ${s}">${s}</span>`:""}${mv?`<span class="tag MV">★ MÁS VENDIDO</span>`:""}</div>`}
 const esc=s=>s.replace(/'/g,"\\'");
 
-const cntS=k=>k=="all"?PERF.length:PERF.filter(p=>(GEN[p.n]||"U")==k).length, cntD=k=>k=="all"?DEC.length:DEC.filter(p=>p.k==k).length;
-function chips(){const list=(tab=="s"?[["all","Todos"],["M","Masculinos"],["F","Femeninos"],["U","Unisex"]]:[["all","Todas"]].concat(CATS.map(c=>[c.k,c.n]))).map(([k,n])=>[k,`${n} (${tab=="s"?cntS(k):cntD(k)})`]);
+const cntS=k=>k=="all"?PERF.length:k=="promo"?PERF.filter(promoP).length:PERF.filter(p=>(GEN[p.n]||"U")==k).length, cntD=k=>k=="all"?DEC.length:DEC.filter(p=>p.k==k).length;
+function chips(){if(fs=="promo"&&!PERF.some(promoP))fs="all";
+ const list=(tab=="s"?[["all","Todos"]].concat(PERF.some(promoP)?[["promo","🔥 Promo"]]:[],[["M","Masculinos"],["F","Femeninos"],["U","Unisex"]]):[["all","Todas"]].concat(CATS.map(c=>[c.k,c.n]))).map(([k,n])=>[k,`${n} (${tab=="s"?cntS(k):cntD(k)})`]);
  const cur=tab=="s"?fs:fd;
  document.getElementById("chips").innerHTML=list.map(([k,n])=>`<button class="${cur==k?"on":""}" onclick="${tab=="s"?"fs":"fd"}='${k}';render()">${n}</button>`).join("")}
 
@@ -352,37 +371,49 @@ let DESC={};
 const dsc=p=>p.d||DESC[norm(p.n)]||"";
 const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 const FREE=65000;
+/* ====== PROMOS ======
+   Se manejan desde la planilla, sin tocar este archivo:
+   - Pestaña "Promos": Activa, Título, Texto, Empieza, Termina, x3 desde, Descuento seleccionados.
+   - Pestaña "Sellados", columna "Promo": poné Sí en los perfumes que llevan el descuento.
+   El descuento de seleccionados es sobre el precio de lista y vale en efectivo / transferencia. */
+const LINK_PROMOS = "https://docs.google.com/spreadsheets/d/1DjyJkLeMX1MFed2XNuijfAL-Mi6L5tNLSlGdYS0PE3w/gviz/tq?tqx=out:csv&headers=1&sheet=Promos";
+let PROMO={on:false,titulo:"",texto:"",fin:null,x3:3,pct:0};
+const X3=()=>PROMO.on?PROMO.x3:3;
+const promoP=p=>!!(PROMO.on&&PROMO.pct>0&&p.pr);
 /* ====== TARJETA DE CRÉDITO (Mercado Pago · Tap) ======
    Según el simulador de Mercado Pago del 11/11/2026: costo por cobro 4,31% + costo por ofrecer 3 cuotas 10,49%, ambos más IVA.
    Para recibir $100.000 hay que cobrar $121.806,98, o sea un recargo de 21,81% sobre el precio en efectivo.
    Si Mercado Pago cambia las tasas, actualizá RECARGO_TARJETA (monto a cobrar ÷ monto que recibís). CUOTAS=0 oculta la opción. */
 const CUOTAS=3, RECARGO_TARJETA=1.2181;
 const tarj=n=>{const q=Math.ceil(n*RECARGO_TARJETA/CUOTAS/100)*100;return {q,t:q*CUOTAS}};
+const lista=p=>CUOTAS?tarj(p.p[0]).t:p.p[0];                       // precio de lista de un sellado
+const x1=p=>promoP(p)?Math.min(p.p[0],Math.round(lista(p)*(1-PROMO.pct/100)/100)*100):p.p[0]; // precio de 1 unidad en efectivo (con promo si tiene)
 /* botón "Agregar" que pasa a "− n +" cuando el producto ya está en el carrito */
 DESC_L.forEach(([ns,d])=>ns.forEach(n=>DESC[norm(n)]=d));
 function ctlIn(k,l,q){const ml=k.split("|")[2];
  return q?`<div class="step"><button data-a="-1" aria-label="Quitar uno">−</button><span><b>${q}</b><small>${ml?ml+" ml":"en el carrito"}</small></span><button data-a="1" aria-label="Agregar uno">+</button></div>`:`<button class="add" data-a="1">${l}</button>`}
 function ctl(k,l){const q=cart[k]||0;return `<div class="ctl" data-k="${hx(k)}" data-l="${hx(l)}" data-q="${q}">${ctlIn(k,l,q)}</div>`}
+function syncMin(c){c=c||calc();document.querySelectorAll("#g .minw").forEach(el=>{el.hidden=c.minOk||!cart["d|"+el.dataset.n+"|5"]})}
 function syncCtl(){document.querySelectorAll("#g .ctl").forEach(el=>{const q=cart[el.dataset.k]||0;if(el.dataset.q!=q){el.dataset.q=q;el.innerHTML=ctlIn(el.dataset.k,el.dataset.l,q)}})}
 function toCat(f){const c=document.getElementById("cat"),y=c.getBoundingClientRect().top;if(y<-4||(f&&y>4))c.scrollIntoView()}
 
 function secS(q,f){let h="";
- const all=srt(PERF.filter(p=>(f=="all"||(GEN[p.n]||"U")==f)&&norm(p.n+" "+dsc(p)).includes(q)),p=>p.p[0]);
+ const all=srt(PERF.filter(p=>(f=="all"||(f=="promo"?promoP(p):(GEN[p.n]||"U")==f))&&norm(p.n+" "+dsc(p)).includes(q)),p=>p.p[0]);
  const ya=all.filter(p=>p.s!="AGOTADO"),enc=all.filter(p=>p.s=="AGOTADO");
- const card=p=>{const ag=p.s=="AGOTADO";
+ const card=p=>{const ag=p.s=="AGOTADO",pp=promoP(p),c1=x1(p);
   return `<div class="card ${ag?"off":""}">${media(p.n,0,ag?"":p.s,!ag&&isMV(p,0))}<div class="body"><span class="cat">Sellado · ${{M:"Masculino",F:"Femenino",U:"Unisex"}[GEN[p.n]||"U"]}${p.ml?` · <span class="ml">${p.ml}</span>`:""}</span><h3>${p.n}</h3>
   ${dsc(p)?`<p class="desc">${dsc(p)}</p>`:""}
-  ${CUOTAS?(()=>{const T=tarj(p.p[0]),off=Math.round((1-p.p[0]/T.t)*100);return `<div class="price"><b>${fm(p.p[0])}</b><span class="off">${off}% OFF</span></div>
+  ${CUOTAS?(()=>{const T=tarj(p.p[0]),off=Math.round((1-c1/T.t)*100);return `<div class="price"><b>${fm(c1)}</b><span class="off ${pp?"hot":""}">${off}% OFF</span></div>
+  ${pp?`<span class="pline">🔥 ${hx(PROMO.titulo||"Promo")} · antes ${fm(p.p[0])}</span>`:""}
   <span class="cash">Lista <s>${fm(T.t)}</s> · en efectivo o transferencia</span>
-  <span class="cuo">💳 o ${CUOTAS} cuotas sin interés de <b>${fm(T.q)}</b></span>`})():`<div class="price"><b>${fm(p.p[0])}</b><span>1 unidad</span></div>`}
+  <span class="cuo">💳 o ${CUOTAS} cuotas sin interés de <b>${fm(T.q)}</b></span>`})():`<div class="price"><b>${fm(c1)}</b><span>1 unidad</span></div>`}
   <span class="from">Desde ${fm(p.p[3])} c/u llevando varios</span>
   <details class="tiers"><summary>Ver precios por cantidad</summary><table>
-  <tr><td>1 unidad</td><td>${fm(p.p[0])}</td></tr><tr><td>Llevando 3 surtidos</td><td>${fm(p.p[1])} c/u</td></tr>
+  <tr><td>1 unidad</td><td>${fm(c1)}</td></tr><tr><td>Llevando ${X3()} surtidos</td><td>${fm(Math.min(p.p[1],c1))} c/u</td></tr>
   <tr><td>Llevando 6 surtidos</td><td>${fm(p.p[2])} c/u</td></tr><tr><td>Llevando 10+ surtidos</td><td>${fm(p.p[3])} c/u</td></tr></table></details>
-  ${ag?`<div class="row"><a class="wa" target="_blank" rel="noopener" href="${waLink(`Hola FRANSU! Quiero encargar 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">Encargar · llega en 3-5 días</a></div>`:
-  `<div class="row">${ctl("s|"+p.n,"Agregar al carrito")}</div><a class="wal" target="_blank" rel="noopener" href="${waLink(`Hola FRANSU! Quiero pedir 1 perfume sellado ${p.n} — ${fm(p.p[0])} (efectivo / transferencia)`)}">o pedilo directo por WhatsApp</a>`}</div></div>`};
+  <div class="row">${ctl("s|"+p.n,ag?"Encargar · 3 a 5 días":"Agregar al carrito")}</div><a class="wal" target="_blank" rel="noopener" href="${waLink(`Hola FRANSU! Quiero ${ag?"encargar":"pedir"} 1 perfume sellado ${p.n} — ${fm(c1)} (efectivo / transferencia)`)}">${ag?"o encargalo directo por WhatsApp":"o pedilo directo por WhatsApp"}</a></div></div>`};
  if(ya.length){
- h+=`<section class="sec"><div class="shead"><h2>${f=="all"?"Disponibles ahora":GN[f]+" disponibles"}</h2><span class="cnt">${ya.length} perfume${ya.length>1?"s":""}</span><p>El precio de cada sellado baja según cuántos lleves en total (podés surtir)</p></div><div class="grid">${ya.map(card).join("")}</div></section>`}
+ h+=`<section class="sec"><div class="shead"><h2>${f=="all"?"Disponibles ahora":f=="promo"?"En promo":GN[f]+" disponibles"}</h2><span class="cnt">${ya.length} perfume${ya.length>1?"s":""}</span><p>El precio de cada sellado baja según cuántos lleves en total (podés surtir)</p></div><div class="grid">${ya.map(card).join("")}</div></section>`}
  if(enc.length){
  h+=`<section class="sec"><div class="shead"><h2>Por encargo</h2><span class="cnt">${enc.length} perfume${enc.length>1?"s":""}</span><p>Sin stock ahora, te lo conseguimos. <span class="encd">Llega en 3 a 5 días hábiles.</span></p></div><div class="grid">${enc.map(card).join("")}</div></section>`}
  return h}
@@ -397,7 +428,7 @@ function secD(q,f){let h="";
   <div class="p2"><div><span>5 ml</span><b>${fm(p.p5[0])}</b></div><div><span>10 ml</span><b>${fm(p.p10[0])}</b></div></div>
   ${p.p5[3]&&p.p5[3]<p.p5[0]?`<span class="from">Desde ${fm(p.p5[3])} los 5 ml llevando varios</span>`:""}
   <details class="tiers"><summary>Ver precios por cantidad</summary><table class="two"><tr><th></th><th>5 ml</th><th>10 ml</th></tr>${L.map((l,i)=>`<tr><td>${l}</td><td>${fm(p.p5[i])}</td><td>${fm(p.p10[i])}</td></tr>`).join("")}</table></details>
-  <div class="row r2">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:ctl("d|"+p.n+"|5","+ 5 ml")+ctl("d|"+p.n+"|10","+ 10 ml")}</div>
+  <div class="row r2">${p.s=="AGOTADO"?`<span class="add alt nostock">Sin stock por ahora</span>`:ctl("d|"+p.n+"|5","+ 5 ml")+ctl("d|"+p.n+"|10","+ 10 ml")}</div>${c.k=="P"?"":`<p class="minw" data-n="${hx(p.n)}" hidden>Compra mínima: sumá otro decant de 5 ml o llevá uno de 10 ml</p>`}
   </div></div>`});
  h+=`</div></section>`});
  return h}
@@ -407,7 +438,15 @@ function render(){chips();const q=norm(document.getElementById("q").value.trim()
  const a=tab=="s"?secS(q,fs):secD(q,fd);let h=a;
  if(q){const b=tab=="s"?secD(q,"all"):secS(q,"all");
   if(b)h+=`<p class="also">${a?"También en":"Lo encontramos en"} ${tab=="s"?"decants":"perfumes sellados"}</p>`+b}
- document.getElementById("g").innerHTML=h||"<p class='empty'>No encontramos ese perfume.</p>"}
+ document.getElementById("g").innerHTML=h||"<p class='empty'>No encontramos ese perfume.</p>";syncMin();renderPromo()}
+/* ---------- cartel de promo ---------- */
+function renderPromo(){const el=document.getElementById("promo"),a=[];
+ if(PROMO.on){if(PROMO.x3<3)a.push(`Llevando ${PROMO.x3} sellados pagás precio x3`);if(PERF.some(promoP))a.push(`${PROMO.pct}% OFF en perfumes seleccionados`);if(PROMO.texto)a.push(hx(PROMO.texto))}
+ if(!a.length){el.hidden=true;return}
+ const d=PROMO.fin?Math.ceil((PROMO.fin-Date.now())/864e5):0;
+ const fin=PROMO.fin?(d<=1?"Termina hoy":d<=7?`Quedan ${d} días`:`Hasta el ${PROMO.fin.getDate()}/${PROMO.fin.getMonth()+1}`):"";
+ el.innerHTML=`<b class="pt">${hx(PROMO.titulo||"PROMO")}</b><span class="px">${a.join(" · ")}</span>${fin?`<span class="pf">⏳ ${fin}</span>`:""}<button type="button" onclick="verPromo()">Ver perfumes</button>`;el.hidden=false}
+function verPromo(){fs=PERF.some(promoP)?"promo":"all";document.getElementById("q").value="";show("s");document.getElementById("cat").scrollIntoView();track("promo-cartel","Tocó el cartel de promo")}
 document.getElementById("g").addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b)return;
  const el=b.closest(".ctl"),k=el.dataset.k,d=+b.dataset.a;
  if(d>0&&!cart[k])add(k);else chg(k,d);
@@ -415,7 +454,7 @@ document.getElementById("g").addEventListener("click",e=>{const b=e.target.close
 if("IntersectionObserver" in window)new IntersectionObserver(([e])=>document.getElementById("stick").classList.toggle("stuck",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(document.getElementById("sen"));
 
 /* ---------- carrito y descuentos ---------- */
-const tierS=n=>n>=10?3:n>=6?2:n>=3?1:0, tierD=n=>n>=10?3:n>=5?2:n>=2?1:0;
+const tierS=n=>n>=10?3:n>=6?2:n>=X3()?1:0, tierD=n=>n>=10?3:n>=5?2:n>=2?1:0;
 const TS=["1 unidad","x3","x6","x10"], TD=["1 unidad","x2","x5","x10"];
 function find(key){const [t,n,ml]=key.split("|");return t=="s"?{t,ml:null,p:PERF.find(x=>x.n==n)}:{t,ml,p:DEC.find(x=>x.n==n)}}
 /* Decants de categorías distintas:
@@ -423,13 +462,13 @@ function find(key){const [t,n,ml]=key.split("|");return t=="s"?{t,ml:null,p:PERF
    - 5 o más del mismo tamaño entre categorías distintas (sin contar Premium): MIX5 menos por decant sobre el precio de su promo. */
 const MIX2=500, MIX5=300;
 function calc(){
- const groups=[];let list=0,pay=0;
+ const groups=[];let list=0,pay=0,base=0; // base = total en efectivo sin el descuento de seleccionados (de ahí sale el precio con tarjeta)
  const keys=Object.keys(cart).filter(k=>cart[k]>0&&find(k).p);
  // sellados
  const sk=keys.filter(k=>k[0]=="s");
  if(sk.length){const n=sk.reduce((a,k)=>a+cart[k],0),ti=tierS(n);
-  const lines=sk.map(k=>{const p=find(k).p,q=cart[k];return {key:k,name:p.n,enc:p.s=="AGOTADO",q,unit:p.p[ti],list:p.p[0]}});
-  const next=[3,6,10].find(x=>x>n);
+  const lines=sk.map(k=>{const p=find(k).p,q=cart[k];return {key:k,name:p.n,enc:p.s=="AGOTADO",q,unit:Math.min(p.p[ti],x1(p)),base:p.p[ti],list:p.p[0],promo:promoP(p)&&x1(p)<p.p[ti]}});
+  const next=[X3(),6,10].find(x=>x>n);
   groups.push({title:"Perfumes sellados",n,tier:TS[ti],lines,hint:next?`Sumá ${next-n} sellado${next-n>1?"s":""} más (podés surtir) y pagás cada uno a precio ${TS[tierS(next)]}.`:""})}
  // decants por categoría y tamaño
  const dk=keys.filter(k=>k[0]=="d");
@@ -444,10 +483,10 @@ function calc(){
   const next=[2,5,10].find(x=>x>n);
   groups.push({title:`Decants ${c.n} · ${ml} ml`,n,tier:mix2?"combinado":TD[ti]+(mx?` − ${fm(MIX5)}`:""),lines,
    hint:mix2?`Llevás 2 decants de categorías distintas: ${fm(MIX2)} menos cada uno.`:(mx?`Llevás ${mixN[ml]} decants de ${ml} ml de categorías distintas: ${fm(MIX5)} menos por decant. `:mc?`Con ${5-mixN[ml]} decant${5-mixN[ml]>1?"s":""} más de ${ml} ml (de A, B o Inspiración) tenés ${fm(MIX5)} menos en cada uno. `:"")+(next?`Sumá ${next-n} decant${next-n>1?"s":""} más de ${c.n} de ${ml} ml y pagás a precio ${TD[tierD(next)]}.`:"")})}));
- groups.forEach(g=>g.lines.forEach(l=>{list+=l.list*l.q;pay+=l.unit*l.q}));
+ groups.forEach(g=>g.lines.forEach(l=>{list+=l.list*l.q;pay+=l.unit*l.q;base+=(l.base||l.unit)*l.q}));
  const np=dk.filter(k=>find(k).p.k!="P"),n5=np.filter(k=>find(k).ml=="5").reduce((a,k)=>a+cart[k],0),n10=np.filter(k=>find(k).ml=="10").reduce((a,k)=>a+cart[k],0);
  const minOk=!np.length||n5>=2||n10>=1;
- return {groups,list,pay,minOk,count:keys.reduce((a,k)=>a+cart[k],0)}}
+ return {groups,list,pay,base,minOk,count:keys.reduce((a,k)=>a+cart[k],0)}}
 
 function add(key){cart[key]=(cart[key]||0)+1;save();upd();
  const k=key.split("|");track("carrito-"+k[1]+(k[2]?"-"+k[2]+"ml":""),"Al carrito: "+k[1]+(k[2]?` (${k[2]} ml)`:""))}
@@ -478,7 +517,7 @@ function ticket(c,card){let t="🧾 *PEDIDO FRANSU*\n";
   if(c.list>c.pay)t+=`Ahorrás ${fm(c.list-c.pay)} 🎉\n`;
   return t}
  // precio de lista = precio con tarjeta; en efectivo / transferencia se descuenta el porcentaje
- const T=tarj(c.pay),L=Math.max(tarj(c.list).t,T.t),off=Math.round((1-c.pay/T.t)*100);
+ const T=tarj(c.base),L=Math.max(tarj(c.list).t,T.t),off=Math.round((1-c.pay/T.t)*100);
  if(card)t+=`(Los precios por unidad de arriba son en efectivo / transferencia)\n`;
  t+=`\nPrecio de lista: ${fm(L)}\n`;
  if(L>T.t)t+=`Descuento por cantidad: −${fm(L-T.t)}\n`;
@@ -502,7 +541,8 @@ function form(c){const r=(k,v,t)=>`<label class="opt"><input type="radio" name="
  <div id="fzona" ${datos.entrega=="envio"?"":"hidden"}><input class="fin" id="fdir" type="text" placeholder="Calle, número y barrio" autocomplete="street-address" value="${hx(datos.dir)}" oninput="setD('dir',this.value)">
  <p class="fnote">${c.pay>=65000?"✅ Tu pedido tiene envío gratis en Mendoza":"El envío es gratis desde $65.000; si no llegás, te pasamos el costo"}</p></div>
  <div class="fg"><span>Pago</span>${r("pago","Efectivo","💵 Efectivo")}${r("pago","Transferencia","🏦 Transferencia")}${CUOTAS?r("pago","Tarjeta",`💳 Tarjeta · ${CUOTAS} cuotas`):""}</div>
- ${datos.pago=="Tarjeta"&&CUOTAS?`<p class="fnote">Con tarjeta de crédito pagás en ${CUOTAS} cuotas sin interés de <b>${fm(tarj(c.pay).q)}</b>. Se cobra por aproximación al recibir o retirar el pedido.<br>💵 En efectivo o transferencia tenés <b>${Math.round((1-c.pay/tarj(c.pay).t)*100)}% OFF</b>: pagás ${fm(c.pay)} y ahorrás ${fm(tarj(c.pay).t-c.pay)}.</p>`:""}
+ ${datos.pago=="Tarjeta"&&CUOTAS?`<p class="fnote">Con tarjeta de crédito pagás en ${CUOTAS} cuotas sin interés de <b>${fm(tarj(c.base).q)}</b>. Se cobra por aproximación al recibir o retirar el pedido.<br>💵 En efectivo o transferencia tenés <b>${Math.round((1-c.pay/tarj(c.base).t)*100)}% OFF</b>: pagás ${fm(c.pay)} y ahorrás ${fm(tarj(c.base).t-c.pay)}.</p>`:""}
+ ${c.groups.some(g=>g.lines.some(l=>l.enc))?`<p class="fnote">📦 Los perfumes por encargo llegan en 3 a 5 días hábiles.</p>`:""}
  <p class="warn" id="ferr" hidden>Elegí cómo lo recibís y cómo pagás.</p></div>`}
 function sendOrder(){const c=calc();
  if(datos.pago=="Tarjeta"&&!CUOTAS)datos.pago="";
@@ -514,13 +554,13 @@ function sendOrder(){const c=calc();
  track("pedido-enviado",`Pedido enviado (${c.count} u, ${fm(c.pay)})`);
  window.open(waLink(t),"_blank")}
 
-function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();
+function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();syncMin(c);
  bar.hidden=!c.count;document.body.classList.toggle("hasbar",!!c.count);
- barTot.textContent=fm(c.pay);barN.textContent=c.count;barSave.textContent=falta<=0?"✓ Envío gratis"+(sv>0?` · Ahorrás ${fm(sv)}`:""):falta<=30000?`Te faltan ${fm(falta)} para el envío gratis`:sv>0?`Ahorrás ${fm(sv)}`:"";
+ barTot.textContent=fm(c.pay);barN.textContent=c.count;barSave.classList.toggle("bw",!c.minOk);barSave.textContent=!c.minOk?"Compra mínima: sumá otro decant de 5 ml o uno de 10 ml":falta<=0?"✓ Envío gratis"+(sv>0?` · Ahorrás ${fm(sv)}`:""):falta<=30000?`Te faltan ${fm(falta)} para el envío gratis`:sv>0?`Ahorrás ${fm(sv)}`:"";
  if(!c.count||!c.minOk)paso=1;
  document.getElementById("ctit").textContent=paso==2?"Entrega y pago":"Tu pedido";document.getElementById("vac").hidden=paso==2;
  if(!c.count){items.innerHTML=`<p class="cempty">Tu carrito está vacío. Tocá "Agregar al carrito" en un perfume o "+ 5 ml / + 10 ml" en un decant.</p>`;sum.innerHTML="";return}
- const T=tarj(c.pay),card=datos.pago=="Tarjeta"&&CUOTAS,L=Math.max(tarj(c.list).t,T.t),offP=Math.round((1-c.pay/T.t)*100);
+ const T=tarj(c.base),card=datos.pago=="Tarjeta"&&CUOTAS,L=Math.max(tarj(c.list).t,T.t),offP=Math.round((1-c.pay/T.t)*100);
  const tot=`<div class="tot"><span>Total efectivo / transf.</span><span>${fm(c.pay)}</span></div>`;
  const desg=`<div><span>Precio de lista</span><span>${fm(L)}</span></div>
   ${L>T.t?`<div class="save"><span>Descuento por cantidad</span><span>−${fm(L-T.t)}</span></div>`:""}
@@ -536,7 +576,7 @@ function upd(){const c=calc(),sv=c.list-c.pay,falta=FREE-c.pay;syncCtl();
   <button class="send" type="button" onclick="sendOrder()">Enviar pedido por WhatsApp</button>`;return}
  /* paso 1: el pedido */
  items.innerHTML=c.groups.map(g=>`<div class="grp"><div class="gh"><span>${g.title}</span><span>${g.n} u · precio ${g.tier}</span></div>
-  ${g.lines.map(l=>`<div class="it"><span class="n">${l.name}${l.enc?" <small>· por encargo</small>":""}</span><span class="pr">${fm(l.unit*l.q)}</span>
+  ${g.lines.map(l=>`<div class="it"><span class="n">${l.name}${l.enc?" <small>· por encargo</small>":""}${l.promo?" <small>· 🔥 promo</small>":""}</span><span class="pr">${fm(l.unit*l.q)}</span>
   <span class="sub">${fm(l.unit)} c/u · ${CUOTAS?`lista <s>${fm(tarj(l.list).t)}</s>`:l.unit<l.list?`<s>${fm(l.list)}</s>`:""}</span>
   <span class="qty"><button onclick="chg('${esc(l.key)}',-1)" aria-label="Quitar uno">−</button><b>${l.q}</b><button onclick="chg('${esc(l.key)}',1)" aria-label="Agregar uno">+</button></span></div>`).join("")}
   ${g.hint?`<div class="hint">💡 ${g.hint}</div>`:""}</div>`).join("");
@@ -583,8 +623,17 @@ async function get(u){const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.
 async function load(){
  if(LINK_SELLADOS.startsWith("http"))try{const rows=await get(LINK_SELLADOS);
   const P=rows.filter(o=>o.nombre&&num(o["1unidad"])&&!/^no/i.test(o.mostrar||"")).map(o=>({n:o.nombre,g:(o.genero||"U")[0].toUpperCase(),
-   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined}));
+   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined,pr:si(o.promo)}));
   if(P.length)PERF=P}catch(e){}
+ if(LINK_PROMOS.startsWith("http"))try{const rows=await get(LINK_PROMOS),o={};
+  const nk=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+  rows.forEach(r=>{if(r.opcion)o[nk(r.opcion)]=String(r.valor||"").replace(/^'/,"").trim()});
+  const fecha=(v,fin)=>{
+   const a=v.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/),b=v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+   const [y,mo,d]=a?[+a[3],+a[2],+a[1]]:b?[+b[1],+b[2],+b[3]]:[0,0,0];return y?new Date(y,mo-1,d,fin?23:0,fin?59:0,fin?59:0):null};
+  if("activa" in o){const ini=fecha(o.empieza||"",0),fin=fecha(o.termina||"",1),now=Date.now();
+   PROMO={on:si(o.activa)&&(!ini||now>=ini)&&(!fin||now<=fin),titulo:o.titulo||"",texto:o.texto||"",fin,
+    x3:num(o.x3desde)==2?2:3,pct:Math.min(60,num(o.descuentoseleccionados))}}}catch(e){}
  if(LINK_DECANTS.startsWith("http"))try{const rows=await get(LINK_DECANTS);const ck=c=>/prem/i.test(c)?"P":/insp/i.test(c)?"I":/b/i.test(c)?"B":"A";
   const D=rows.filter(o=>o.nombre&&num(o["10ml1u"])&&!/^no/i.test(o.mostrar||"")).map(o=>({n:o.nombre,k:ck(o.categoria||""),
    s:/^no/i.test(o.disponible||"")?"AGOTADO":si(o.nuevo)?"NUEVO":"",p5:[num(o["5ml1u"]),num(o["5mlx2"]),num(o["5mlx5"]),num(o["5mlx10"])],p10:[num(o["10ml1u"]),num(o["10mlx2"]),num(o["10mlx5"]),num(o["10mlx10"])],f:o.foto,d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined}));
