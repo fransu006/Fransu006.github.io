@@ -374,13 +374,16 @@ const FREE=65000;
 /* ====== PROMOS ======
    Se manejan desde la planilla, sin tocar este archivo:
    - Pestaña "Promos": Activa, Título, Texto, Empieza, Termina, x3 desde, Descuento seleccionados.
-   - Pestaña "Sellados", columna "Promo": poné Sí en los perfumes que llevan el descuento.
+   - Pestaña "Sellados", columna "Promo": poné Sí en los perfumes que llevan el descuento general,
+     o un número (25, 30…) para darle a ese perfume su propio porcentaje.
    El descuento de seleccionados es sobre el precio de lista pagando en efectivo / transferencia;
    con tarjeta, las cuotas se calculan sobre ese precio ya rebajado. */
 const LINK_PROMOS = "https://docs.google.com/spreadsheets/d/1DjyJkLeMX1MFed2XNuijfAL-Mi6L5tNLSlGdYS0PE3w/gviz/tq?tqx=out:csv&headers=1&sheet=Promos";
 let PROMO={on:false,titulo:"",texto:"",fin:null,x3:3,pct:0};
 const X3=()=>PROMO.on?PROMO.x3:3;
-const promoP=p=>!!(PROMO.on&&PROMO.pct>0&&p.pr);
+// % de descuento de un sellado: en la columna "Promo", Sí usa el porcentaje general y un número (25, 30…) usa ese porcentaje
+const pctP=p=>!PROMO.on||!p.pr?0:p.pr===true?PROMO.pct:p.pr;
+const promoP=p=>pctP(p)>0;
 /* ====== TARJETA DE CRÉDITO (Mercado Pago · Tap) ======
    Según el simulador de Mercado Pago del 11/11/2026: costo por cobro 4,31% + costo por ofrecer 3 cuotas 10,49%, ambos más IVA.
    Para recibir $100.000 hay que cobrar $121.806,98, o sea un recargo de 21,81% sobre el precio en efectivo.
@@ -388,7 +391,7 @@ const promoP=p=>!!(PROMO.on&&PROMO.pct>0&&p.pr);
 const CUOTAS=3, RECARGO_TARJETA=1.2181;
 const tarj=n=>{const q=Math.ceil(n*RECARGO_TARJETA/CUOTAS/100)*100;return {q,t:q*CUOTAS}};
 const lista=p=>CUOTAS?tarj(p.p[0]).t:p.p[0];                       // precio de lista de un sellado
-const x1=p=>promoP(p)?Math.min(p.p[0],Math.round(lista(p)*(1-PROMO.pct/100)/100)*100):p.p[0]; // precio de 1 unidad en efectivo (con promo si tiene)
+const x1=p=>promoP(p)?Math.min(p.p[0],Math.round(lista(p)*(1-pctP(p)/100)/100)*100):p.p[0]; // precio de 1 unidad en efectivo (con promo si tiene)
 /* botón "Agregar" que pasa a "− n +" cuando el producto ya está en el carrito */
 DESC_L.forEach(([ns,d])=>ns.forEach(n=>DESC[norm(n)]=d));
 function ctlIn(k,l,q){const ml=k.split("|")[2];
@@ -442,7 +445,7 @@ function render(){chips();const q=norm(document.getElementById("q").value.trim()
  document.getElementById("g").innerHTML=h||"<p class='empty'>No encontramos ese perfume.</p>";syncMin();renderPromo()}
 /* ---------- cartel de promo ---------- */
 function renderPromo(){const el=document.getElementById("promo"),a=[];
- if(PROMO.on){if(PROMO.x3<3)a.push(`Llevando ${PROMO.x3} sellados pagás precio x3`);if(PERF.some(promoP))a.push(`${PROMO.pct}% OFF en perfumes seleccionados`);if(PROMO.texto)a.push(hx(PROMO.texto))}
+ if(PROMO.on){if(PROMO.x3<3)a.push(`Llevando ${PROMO.x3} sellados pagás precio x3`);const ps=PERF.map(pctP).filter(x=>x>0);if(ps.length){const mx=Math.max(...ps);a.push(`${Math.min(...ps)==mx?"":"Hasta "}${mx}% OFF en perfumes seleccionados`)}if(PROMO.texto)a.push(hx(PROMO.texto))}
  if(!a.length){el.hidden=true;return}
  const d=PROMO.fin?Math.ceil((PROMO.fin-Date.now())/864e5):0;
  const fin=PROMO.fin?(d<=1?"Termina hoy":d<=7?`Quedan ${d} días`:`Hasta el ${PROMO.fin.getDate()}/${PROMO.fin.getMonth()+1}`):"";
@@ -627,7 +630,7 @@ async function get(u){const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.
 async function load(){
  if(LINK_SELLADOS.startsWith("http"))try{const rows=await get(LINK_SELLADOS);
   const P=rows.filter(o=>o.nombre&&num(o["1unidad"])&&!/^no/i.test(o.mostrar||"")).map(o=>({n:o.nombre,g:(o.genero||"U")[0].toUpperCase(),
-   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined,pr:si(o.promo)}));
+   s:/agot/i.test(o.estado)?"AGOTADO":/nuevo/i.test(o.estado)?"NUEVO":"",p:[num(o["1unidad"]),num(o.x3),num(o.x6),num(o.x10)],f:o.foto,ml:o.ml?(/ml/i.test(o.ml)?o.ml:o.ml+" ml"):"",d:o.descripcion||"",mv:"masvendido" in o?si(o.masvendido):undefined,pr:/\d/.test(o.promo||"")?Math.min(90,num(o.promo)):si(o.promo)}));
   if(P.length)PERF=P}catch(e){}
  if(LINK_PROMOS.startsWith("http"))try{const rows=await get(LINK_PROMOS),o={};
   const nk=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
